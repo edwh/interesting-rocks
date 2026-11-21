@@ -140,6 +140,7 @@ function renderProgress() {
 const FAMILIES = { art: 'Art in the landscape', old: 'Old Britain', listed: 'Old Britain', nature: 'Nature and underground', people: 'People and streets', museums: 'Museums and galleries' };
 
 async function setAllLayers(on) {
+  undoLayer = null;
   shownLayers = new Set(on ? layers.map(l => l.key) : []);
   savePrefs();
   renderLayerChips();
@@ -210,6 +211,7 @@ function addLayerChip(layer, row) {
   b.querySelector('.ln').textContent = layer.name;
   b.querySelector('.lc').textContent = done ? `${done}/${total.toLocaleString('en-GB')}` : total.toLocaleString('en-GB');
   b.onclick = async () => {
+    undoLayer = null;
     if (on) shownLayers.delete(layer.key); else shownLayers.add(layer.key);
     savePrefs();
     renderLayerChips();
@@ -259,7 +261,7 @@ function renderFilterChips() {
   }, 'Show only the places on your list, wherever they are. Download GPX then saves your list.');
   group('Access');
   for (const k of Object.keys(ACCESS)) {
-    chip(`<span class="pin mini ${k}" style="--c:var(--muted);--k:var(--panel)"></span>${{ open: 'Open', limited: 'Ticketed or by arrangement', gone: 'Lost or unconfirmed' }[k]}`,
+    chip(`<span class="pin mini ${k}" style="--c:var(--muted);--k:var(--panel)"></span>${ACCESS[k]}`,
       !hiddenAccess.has(k), () => {
         if (hiddenAccess.has(k)) hiddenAccess.delete(k); else hiddenAccess.add(k);
         savePrefs(); renderFilterChips(); refreshAll();
@@ -292,12 +294,59 @@ function itemButton(s) {
   return b;
 }
 
+// Each layer heading in the list has a switch, so a layer can be turned off from the list itself;
+// an Undo bar follows for a few seconds.
+let undoLayer = null, undoTimer;
+function layerSwitch(layer) {
+  const b = document.createElement('button');
+  b.className = 'switch';
+  b.setAttribute('role', 'switch');
+  b.setAttribute('aria-checked', 'true');
+  b.setAttribute('aria-label', `Show ${layer.name}`);
+  b.title = `Turn ${layer.name} off`;
+  b.onclick = e => {
+    e.stopPropagation();
+    shownLayers.delete(layer.key);
+    savePrefs();
+    undoLayer = layer;
+    clearTimeout(undoTimer);
+    undoTimer = setTimeout(() => { undoLayer = null; document.querySelector('.undobar')?.remove(); }, 12000);
+    refreshAll();
+  };
+  return b;
+}
+function undoBar() {
+  const d = document.createElement('div');
+  d.className = 'undobar';
+  d.setAttribute('role', 'status');
+  d.innerHTML = '<span></span><button class="linkbtn">Undo</button>';
+  d.querySelector('span').textContent = `${undoLayer.name} turned off.`;
+  d.querySelector('button').onclick = async () => {
+    const l = undoLayer;
+    undoLayer = null;
+    shownLayers.add(l.key);
+    savePrefs();
+    await ensureLoaded();
+    refreshAll();
+  };
+  return d;
+}
+function heading(text, layer) {
+  const h = document.createElement('h3');
+  const t = document.createElement('span');
+  t.textContent = text;
+  h.append(t);
+  if (layer && !wantedOnly) h.append(layerSwitch(layer));
+  return h;
+}
+
 function renderList() {
   const list = $('list');
   list.textContent = '';
   const { items, label } = listed();
   $('count').textContent = label;
   $('gpx').disabled = !items.length;
+  if (undoLayer) list.append(undoBar());
   if (!items.length) {
     const p = document.createElement('p');
     p.className = 'empty';
@@ -310,9 +359,23 @@ function renderList() {
   if (near) {
     const sec = document.createElement('section');
     sec.className = 'region';
-    const h = document.createElement('h3');
-    h.textContent = 'Nearest first';
-    sec.append(h);
+    sec.append(heading('Nearest first'));
+    // Nearest-first mixes layers, so the layers in the list get their switches in a row at the top.
+    const present = layers.filter(l => items.some(s => s.cat === l.key));
+    if (!wantedOnly && present.length) {
+      const strip = document.createElement('div');
+      strip.className = 'listlayers';
+      for (const l of present) {
+        const chip = document.createElement('span');
+        chip.className = 'll';
+        chip.innerHTML = `<span class="pin mini" style="--c:${l.color};--k:${l.ink}">${icon(l.icon, 9)}</span><span class="ln"></span><span class="lc"></span>`;
+        chip.querySelector('.ln').textContent = l.name;
+        chip.querySelector('.lc').textContent = items.filter(s => s.cat === l.key).length.toLocaleString('en-GB');
+        chip.append(layerSwitch(l));
+        strip.append(chip);
+      }
+      sec.append(strip);
+    }
     for (const s of items.sort((a, b) => dist(a) - dist(b)).slice(0, LIST_CAP)) sec.append(itemButton(s));
     list.append(sec);
     if (items.length > LIST_CAP) {
@@ -332,9 +395,7 @@ function renderList() {
     if (!inLayer.length) continue;
     const sec = document.createElement('section');
     sec.className = 'region';
-    const h = document.createElement('h3');
-    h.textContent = `${layer.name} · ${inLayer.length.toLocaleString('en-GB')}`;
-    sec.append(h);
+    sec.append(heading(`${layer.name} · ${inLayer.length.toLocaleString('en-GB')}`, layer));
     for (const s of inLayer.sort(order).slice(0, rest)) { sec.append(itemButton(s)); rest--; }
     list.append(sec);
   }

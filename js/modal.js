@@ -7,7 +7,8 @@ let current = null;
 let photoIndex = 0;
 let ctx = null;
 
-export const ACCESS = { open: 'Open to visit', limited: 'Ticketed, seasonal or by arrangement', gone: 'Lost, unfinished or unconfirmed' };
+// Whether the public can visit, not opening hours (which would go out of date). Private places are not shown.
+export const ACCESS = { open: 'Free public access', limited: 'Paid entry or booking', gone: 'Lost or unconfirmed' };
 
 export function fmtDate(iso) {
   const d = new Date(iso + 'T12:00:00');

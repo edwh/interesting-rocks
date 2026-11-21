@@ -64,7 +64,7 @@ export function initFrom({ map, findPlaces, layerOf, saved, onChange }) {
     centre = c;
     closeSugg();
     pin?.remove(); circle?.remove();
-    pin = L.circleMarker(c.ll, { radius: 7, color: '#fff', weight: 2, fillColor: '#1d2320', fillOpacity: 1, interactive: false }).addTo(map);
+    pin = L.circleMarker(c.ll, { radius: 7, color: '#fff', weight: 2.5, fillColor: accent(), fillOpacity: 1, interactive: false }).addTo(map);
     circle = L.circle(c.ll, { radius: radius(), color: accent(), weight: 2, fillColor: accent(), fillOpacity: 0.06, interactive: false }).addTo(map);
     input.value = c.mine ? '' : c.name;
     range.hidden = false;

@@ -44,8 +44,9 @@ const records = els.map(e => {
     url: wp || t.website || t['contact:website'] || `https://www.openstreetmap.org/${type[e.type[0]]}/${e.id}`,
     wikidata: /^Q\d+$/.test(t.wikidata || '') ? t.wikidata : undefined,
     file: commonsFile(t.wikimedia_commons || t.image),
-    // Free entry counts as open; otherwise museums keep opening hours or charge, so "ticketed or by arrangement".
-    access: t.fee === 'no' || t.fee === 'free' ? 'open' : 'limited',
+    // Public access, not opening hours: free entry is "free public access", a charge is "paid entry or booking",
+    // no fee recorded is unknown, and a private collection is left off the map.
+    access: ['private', 'no'].includes(t.access) ? 'private' : t.fee === 'no' || t.fee === 'free' ? 'open' : t.fee === 'yes' ? 'limited' : 'unknown',
     src: `osm ${type[e.type[0]]} ${e.id}` + (t.wikidata ? `; wikidata ${t.wikidata}` : ''), fetched,
   };
 });

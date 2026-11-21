@@ -130,7 +130,7 @@ const osm = els.map(e => {
     year: t.start_date ? t.start_date.slice(0, 4) : undefined,
     url: t.wikipedia ? 'https://en.wikipedia.org/wiki/' + encodeURIComponent(t.wikipedia.replace(/^en:/, '').replace(/ /g, '_')) : `https://www.openstreetmap.org/${type[e.type[0]]}/${e.id}`,
     wikidata: t.wikidata || undefined, file: commonsFile(t.wikimedia_commons || t.image),
-    access: t.access === 'private' ? 'limited' : 'open',
+    access: ['private', 'no'].includes(t.access) ? 'private' : 'open',
     src: `osm ${type[e.type[0]]} ${e.id}` + (t.wikidata ? `; wikidata ${t.wikidata}` : ''), fetched,
   };
 });

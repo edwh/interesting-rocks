@@ -79,7 +79,7 @@ if __name__=='__main__':
     if layer=='wells':r=B.merge(B.wdrecs('wells',B.wells_wd),B.osmrecs('osm-wells.json',B.wells_osm))
     elif layer=='prehistoric':r=B.merge(B.wdrecs('prehistoric',B.pre_wd),B.osmrecs('osm-standing.json',B.pre_osm))
     elif layer=='caves':r=B.merge(B.wdrecs('caves',B.caves_wd),B.osmrecs('osm-caves.json',B.caves_osm))
-    elif layer=='follies':r=B.merge(B.wdrecs('follies',B.follies_wd)+B.wdrecs('hillfigures',B.hill_wd)+B.wdrecs('caves',lambda d:{'group':'Grotto','kind':'Grotto','access':'limited','_score':1} if B.has(d,'grotto','shell grotto') else None))
+    elif layer=='follies':r=B.merge(B.wdrecs('follies',B.follies_wd)+B.wdrecs('hillfigures',B.hill_wd)+B.wdrecs('caves',lambda d:{'group':'Grotto','kind':'Grotto','access':'unknown','_score':1} if B.has(d,'grotto','shell grotto') else None))
     elif layer=='trees':r=B.merge(B.wdrecs('trees',B.trees_wd),B.osmrecs('osm-trees.json',B.trees_osm),B.osmrecs('osm-trees2.json',B.trees_osm))
     elif layer=='greenman':r=B.greenmen()
     B.finish(layer,B.pick(r,big),outp,fetched,ov)

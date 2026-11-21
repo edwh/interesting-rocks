@@ -85,14 +85,15 @@ def caves_wd(d):
     return {'group':g,'kind':g,'access':'limited' if s>=5 else 'open','_score':s}
 def caves_osm(t):
     n=t['name']
-    if t.get('tourism') or t.get('historic')=='mine':g,s='Show cave or mine',4
-    else:g,s='Cave',1
-    return {'group':g,'kind':g,'access':'limited','_score':s}
+    if t.get('tourism') or t.get('historic')=='mine':g,s,a='Show cave or mine',4,'limited'
+    else:g,s,a='Cave',1,'unknown'
+    if t.get('access') in ('private','no'):a='private'
+    return {'group':g,'kind':g,'access':a,'_score':s}
 def follies_wd(d):
     if has(d,'grotto','shell grotto'):g='Grotto'
     elif has(d,'faux lighthouse','folly tower','folly'):g='Folly'
     else:g='Folly'
-    return {'group':g,'kind':g,'access':'limited','_score':1}
+    return {'group':g,'kind':g,'access':'unknown','_score':1}
 def hill_wd(d):return {'group':'Hill figure','kind':'Hill figure','access':'open','_score':5}
 def trees_wd(d):return {'group':'Ancient tree','kind':'Notable tree','access':'open','_score':3}
 def trees_osm(t):
@@ -143,7 +144,7 @@ def greenmen():
         if cats:name=re.sub(r'^Category:','',cats.most_common(1)[0][0]);name=re.sub(r'\s*\((interior|exterior|[a-z ]+)\)$','',name);name=re.sub(r'^(Ceiling|Interior|Roof|Nave|Exterior) of ','',name)
         else:
             name=re.sub(r'^File:','',c['f'][0][0]);name=re.split(r' - |\.jpg|\.JPG|\(',name)[0].strip(' ,')
-        out.append({'name':name+' (Green Man)' if not re.search('Green Man',name) else name,'ll':c['ll'],'group':'Green Man carving','kind':'Foliate head carving','access':'limited','_score':len(c['f']),
+        out.append({'name':name+' (Green Man)' if not re.search('Green Man',name) else name,'ll':c['ll'],'group':'Green Man carving','kind':'Foliate head carving','access':'unknown','_score':len(c['f']),
                     'src':'commons '+c['f'][0][0],'_files':[t for t,v in c['f']],'_photos':[],'url':None,'_desc':'','_loc':None,'wikidata':None,'approx':True})
     return out
 # ---------- region/locality via postcodes.io ----------

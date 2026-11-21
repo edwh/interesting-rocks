@@ -100,10 +100,10 @@
    {
     "tier": 2,
     "file": "data/layers/artwork-2.json",
-    "count": 8409
+    "count": 8405
    }
   ],
-  "count": 10656,
+  "count": 10652,
   "photos": 2018,
   "fetched": "2026-11-21"
  },
@@ -349,10 +349,10 @@
    {
     "tier": 2,
     "file": "data/layers/caves-2.json",
-    "count": 330
+    "count": 329
    }
   ],
-  "count": 534,
+  "count": 533,
   "photos": 144,
   "fetched": "2026-11-21"
  },
@@ -401,6 +401,9 @@
   "defaultOn": true,
   "attribution": "Wikidata (CC0); plaque data from Open Plaques (public domain); some positions © OpenStreetMap contributors (ODbL); photos credited individually.",
   "family": "people",
+  "accessMap": {
+   "limited": "unknown"
+  },
   "fetch": "python3 scripts/layers/writers/run.py   (private inputs in scripts/work/private/writers/)",
   "files": [
    {
@@ -487,10 +490,10 @@
    {
     "tier": 2,
     "file": "data/layers/warmemorials-2.json",
-    "count": 4589
+    "count": 4588
    }
   ],
-  "count": 9833,
+  "count": 9832,
   "photos": 5192,
   "fetched": "2026-11-21"
  },
@@ -544,16 +547,16 @@
    {
     "tier": 1,
     "file": "data/layers/museums-1.json",
-    "count": 2170
+    "count": 2166
    },
    {
     "tier": 2,
     "file": "data/layers/museums-2.json",
-    "count": 2023
+    "count": 2021
    }
   ],
-  "count": 4193,
-  "photos": 1485,
+  "count": 4187,
+  "photos": 1482,
   "fetched": "2026-11-21"
  }
 ]

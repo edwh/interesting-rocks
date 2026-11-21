@@ -13,7 +13,7 @@ Refresh it with `scripts/osm/fetch-extract.sh && python3 scripts/osm/osm_extract
 | Andy Goldsworthy | 58 | 58 | n/a | MIT (this project) |
 | Antony Gormley | 25 | 25 | 2026-11-21 | CC0 and ODbL |
 | Land art and sculpture trails | 43 | 43 | 2026-11-21 | CC0 and ODbL |
-| Public art | 10656 | 2247 | 2026-11-21 | CC0; ODbL 1.0 |
+| Public art | 10652 | 2247 | 2026-11-21 | CC0; ODbL 1.0 |
 | Stone circles and standing stones | 1270 | 449 | 2026-11-21 | CC0; ODbL 1.0 |
 | Holy wells | 316 | 51 | 2026-11-21 | CC0 and ODbL |
 | Green Men | 109 | 109 | 2026-11-21 | Per-photo Commons licences |
@@ -21,13 +21,13 @@ Refresh it with `scripts/osm/fetch-extract.sh && python3 scripts/osm/osm_extract
 | Milestones and guide posts | 4898 | 4424 | 2026-11-21 | Open Government Licence v3.0 and ODbL |
 | Listed buildings | 60511 | 13304 | 2026-11-21 | Open Government Licence v3.0 |
 | Notable trees | 264 | 76 | 2026-11-21 | CC0 and ODbL |
-| Caves and show mines | 534 | 204 | 2026-11-21 | CC0 and ODbL |
+| Caves and show mines | 533 | 204 | 2026-11-21 | CC0 and ODbL |
 | Interesting rocks | 3010 | 508 | 2026-11-21 | CC0; ODbL 1.0; Open Government Licence v3.0 |
 | Writers' places | 237 | 237 | 2026-11-21 | CC0, public domain (Open Plaques) and ODbL |
 | Plaques | 21010 | 12846 | 2026-11-21 | Public domain (Open Plaques, PDDL 1.0); CC0; ODbL 1.0 for plaques found only in OpenStreetMap |
-| War memorials | 9833 | 5244 | 2026-11-21 | CC0; ODbL 1.0; Open Government Licence v3.0; public domain (Open Plaques) |
+| War memorials | 9832 | 5244 | 2026-11-21 | CC0; ODbL 1.0; Open Government Licence v3.0; public domain (Open Plaques) |
 | Ghost signs | 1111 | 156 | 2026-11-21 | Per-photo CC licences (mostly CC BY-SA) |
-| Museums and galleries | 4193 | 2170 | 2026-11-21 | ODbL 1.0; CC0 |
+| Museums and galleries | 4187 | 2166 | 2026-11-21 | ODbL 1.0; CC0 |
 
 ## Andy Goldsworthy (`goldsworthy`)
 
@@ -71,7 +71,7 @@ Named sculptures, statues and installations recorded in Wikidata and OpenStreetM
 - Attribution: Wikidata (CC0); © OpenStreetMap contributors (ODbL); photos credited individually.
 - Fetch: `node scripts/layers/artwork/fetch.mjs`, then `scripts/osm/fetch-extract.sh && python3 scripts/osm/osm_extract.py build`, then `node scripts/layers/artwork/fetch-osm.mjs`
 - Work files: `scripts/work/layers/artwork.json`, `scripts/work/layers/artwork-osm.json`
-- Built: 10656 places (tier 1: 2247, tier 2: 8409), 2018 with photos, fetched 2026-11-21
+- Built: 10652 places (tier 1: 2247, tier 2: 8405), 2018 with photos, fetched 2026-11-21
 
 ## Stone circles and standing stones (`prehistoric`)
 
@@ -159,7 +159,7 @@ Show caves and show mines, and named caves and potholes. Most caves need caving 
 - Attribution: Wikidata (CC0); © OpenStreetMap contributors (ODbL); photos credited individually.
 - Fetch: `python3 scripts/layers/interests/run.py scripts/work/layers --refetch caves`
 - Work files: `scripts/work/layers/caves.json`
-- Built: 534 places (tier 1: 204, tier 2: 330), 144 with photos, fetched 2026-11-21
+- Built: 533 places (tier 1: 204, tier 2: 329), 144 with photos, fetched 2026-11-21
 
 ## Interesting rocks (`rocks`)
 
@@ -203,7 +203,7 @@ Cenotaphs, crosses, statues, plaques and rolls of honour remembering those who d
 - Attribution: Wikidata (CC0); © OpenStreetMap contributors (ODbL); listed memorials contain Historic England, Historic Environment Scotland and Cadw data under the Open Government Licence v3.0; Open Plaques (public domain); photos credited individually.
 - Fetch: `scripts/osm/fetch-extract.sh && python3 scripts/osm/osm_extract.py build`, then `node scripts/layers/warmemorials/fetch.mjs`
 - Work files: `scripts/work/layers/warmemorials-wd.json`, `scripts/work/layers/warmemorials-osm.json`
-- Built: 9833 places (tier 1: 5244, tier 2: 4589), 5192 with photos, fetched 2026-11-21
+- Built: 9832 places (tier 1: 5244, tier 2: 4588), 5192 with photos, fetched 2026-11-21
 
 ## Ghost signs (`ghostsigns`)
 
@@ -225,4 +225,4 @@ Museums and public galleries mapped in OpenStreetMap, with photos and Wikipedia 
 - Attribution: © OpenStreetMap contributors (ODbL); Wikidata (CC0); photos credited individually.
 - Fetch: `scripts/osm/fetch-extract.sh && python3 scripts/osm/osm_extract.py build`, then `node scripts/layers/museums/fetch.mjs`
 - Work files: `scripts/work/layers/museums.json`
-- Built: 4193 places (tier 1: 2170, tier 2: 2023), 1485 with photos, fetched 2026-11-21
+- Built: 4187 places (tier 1: 2166, tier 2: 2021), 1482 with photos, fetched 2026-11-21

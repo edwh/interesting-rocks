@@ -66,7 +66,7 @@ const records = [...els.values()].map(e => {
     year: t.start_date || undefined, about: t.description || undefined,
     url: t.wikipedia ? 'https://en.wikipedia.org/wiki/' + encodeURIComponent(t.wikipedia.replace(/^en:/, '').replace(/ /g, '_')) : (t.website || undefined),
     wikidata: t.wikidata || undefined, photoFile: commonsFile(t),
-    access: t.access === 'private' ? 'limited' : 'open',
+    access: ['private', 'no'].includes(t.access) ? 'private' : 'open',
     src: `osm ${type} ${e.id}` + (t.wikidata ? `; wikidata ${t.wikidata}` : ''), fetched,
   };
 });

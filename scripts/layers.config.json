@@ -236,6 +236,9 @@
   "defaultOn": true,
   "attribution": "Wikidata (CC0); plaque data from Open Plaques (public domain); some positions © OpenStreetMap contributors (ODbL); photos credited individually.",
   "family": "people",
+  "accessMap": {
+   "limited": "unknown"
+  },
   "fetch": "python3 scripts/layers/writers/run.py   (private inputs in scripts/work/private/writers/)"
  },
  {

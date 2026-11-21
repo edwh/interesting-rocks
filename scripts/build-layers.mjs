@@ -32,6 +32,8 @@ function hostPhoto(p) {
   return null;
 }
 const ACCESS = new Set(['open', 'limited', 'gone', 'unknown']);
+// Places a source marks as not open to the public (OSM access=private or no) are left off the map.
+const privateDropped = {};
 const KEEP = ['id', 'cat', 'name', 'artist', 'author', 'group', 'year', 'll', 'approx', 'place', 'region', 'access',
   'kind', 'count', 'about', 'note', 'url', 'grid', 'grade', 'tier', 'wikidata', 'src', 'fetched', 'photos'];
 // Big layers ship compact records: the source id is the record id, the date is in the manifest,
@@ -173,6 +175,7 @@ for (const layer of config) {
     const o = fix[raw.src] || fix[raw.id];
     if (o && o.hide) continue;
     const r = { ...raw, ...(o || {}), cat: layer.key };
+    if (r.access === 'private') { privateDropped[layer.key] = (privateDropped[layer.key] || 0) + 1; continue; }
     if (!r.name || !Array.isArray(r.ll) || r.ll.length !== 2 || !r.ll.every(Number.isFinite)) {
       problems.push(`${layer.key}/${r.id}: missing name or position, skipped`); continue;
     }
@@ -189,6 +192,7 @@ for (const layer of config) {
     if (layer.curated) { refsOf(r).forEach(x => curatedRefs.add(x)); curatedPlaces.push(r); }
     else if (duplicateOfCurated(r, layer) || seenInLayer(r)) { (dropped[layer.key] ||= []).push(r.name); continue; }
     r.region = regionFor(r);
+    if (layer.accessMap?.[r.access]) r.access = layer.accessMap[r.access];
     if (!ACCESS.has(r.access)) r.access = layer.defaultAccess || 'open';
     r.photos = (r.photos || []).map(p => p && p.src && p.page ? hostPhoto(p) : null)
       .filter(p => p && FREE.test((p.license || '').trim()) && !(NEEDS_AUTHOR.test(p.license) && !(p.artist || '').trim() || /^unknown$/i.test((p.artist || '').trim()) && NEEDS_AUTHOR.test(p.license)))
@@ -255,5 +259,6 @@ fs.writeFileSync('scripts/layers/SOURCES.md', md.join('\n'));
 
 if (geoUnhosted.size) console.log(`${geoUnhosted.size} Geograph photos dropped because they are not hosted yet (run node scripts/photos/geograph.mjs)`);
 for (const [k, n] of Object.entries(claimCount)) console.log(`${k}: moved ${n}`);
+for (const [k, n] of Object.entries(privateDropped)) console.log(`${k}: left out ${n} not open to the public`);
 for (const [k, n] of Object.entries(dropped)) console.log(`${k}: dropped ${n.length} duplicates (of a curated place or an earlier source): ${n.slice(0, 8).join("; ")}`);
 if (problems.length) console.log('\n' + problems.join('\n'));

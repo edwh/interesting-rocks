@@ -313,7 +313,7 @@ def osm_to_rec(el):
     if t.get('wikimedia_commons'):
         files = [t['wikimedia_commons']]
     ref = '%s/%d' % (el['type'], el['id'])
-    acc = 'limited' if t.get('access') in ACCESS_PRIVATE else 'open'
+    acc = 'private' if t.get('access') in ACCESS_PRIVATE else 'open'
     return dict(name=t['name'], group=g, ll=[lat, lon], approx=el['type'] != 'node', kind=KIND[g],
                 about='', url=wp or 'https://www.openstreetmap.org/' + ref, wikidata=t.get('wikidata', ''),
                 access=acc, srcs=['osm %s %d' % (el['type'], el['id'])], loc='', files=files, cat='', wp=bool(wp),
@@ -370,7 +370,7 @@ def gcr_recs(raw, use_raw):
         g = 'Fossil site' if any(FOSSIL_BLOCK.search(b) for b in blocks) else 'Geology site'
         about = 'Geological Conservation Review site, listed for its %s interest.' % ' and '.join(b.rstrip('.') for b in blocks[:2]) if blocks else 'Geological Conservation Review site.'
         out.append(dict(name=e['name'], group=g, ll=[lat, lon], approx=True, kind=KIND[g], about=about, url=GCR_WIKI, wikidata='',
-                        access='limited', srcs=['gcr ' + '/'.join(sorted(e['nos']))] if e['nos'] else ['gcr ' + e['nation'].lower()],
+                        access='unknown', srcs=['gcr ' + '/'.join(sorted(e['nos']))] if e['nos'] else ['gcr ' + e['nation'].lower()],
                         loc='', files=[], cat='', wp=False, kinds=set(), nation=e['nation']))
     return out
 
@@ -389,7 +389,7 @@ def lpo_recs(raw, use_raw):
         loc = ', '.join(x.strip() for x in (a.get('LOCATION'), a.get('COUNTY')) if x and x.strip())
         out.append(dict(name=name, group='Limestone pavement', ll=[c['y'], c['x']], approx=True, kind=KIND['Limestone pavement'],
                         about='Limestone pavement protected by a Limestone Pavement Order%s.' % (' (confirmed %s)' % a['DATE_CONF'].strip() if a.get('DATE_CONF', '').strip() else ''),
-                        url=GCR_WIKI.replace('Geological_Conservation_Review', 'Limestone_pavement'), wikidata='', access='limited',
+                        url=GCR_WIKI.replace('Geological_Conservation_Review', 'Limestone_pavement'), wikidata='', access='unknown',
                         srcs=['lpo ' + (a.get('Ref_Num') or str(a['OBJECTID']))], loc=loc, files=[], cat='', wp=False, kinds=set()))
     return out
 
@@ -446,7 +446,9 @@ def mergeinto(tgt, other):
         m['ll'], m['approx'] = lo['ll'], False
     if hi['group'] in ('Geology site', 'Rock formation') and lo['group'] not in ('Geology site', 'Rock formation'):
         m['group'] = lo['group']; m['kind'] = lo['kind']
-    if 'limited' in (hi['access'], lo['access']) and 'open' not in (hi['access'], lo['access']):
+    if 'private' in (hi['access'], lo['access']):
+        m['access'] = 'private'
+    elif 'limited' in (hi['access'], lo['access']) and 'open' not in (hi['access'], lo['access']):
         m['access'] = 'limited'
     elif 'gone' in (hi['access'], lo['access']):
         m['access'] = 'gone'
@@ -719,7 +721,7 @@ def validate(out):
         assert o['id'] not in ids, 'dup id ' + o['id']
         ids.add(o['id'])
         assert in_gb(*o['ll']), 'outside GB ' + o['id']
-        assert o['group'] in GROUP_PRIORITY and o['access'] in ('open', 'limited', 'gone')
+        assert o['group'] in GROUP_PRIORITY and o['access'] in ('open', 'limited', 'gone', 'unknown', 'private')
         for p in o['photos']:
             assert FREE_LIC.match(p['license']) and not BAD_LIC.search(p['license']), 'licence ' + o['id']
     json.loads(json.dumps(out))
