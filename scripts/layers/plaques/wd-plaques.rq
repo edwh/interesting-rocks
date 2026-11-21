@@ -1,0 +1,11 @@
+# Plaque items (commemorative plaque / blue plaque) with coordinates in the British Isles bounding box
+SELECT ?i ?coord ?opid ?subj ?t WHERE {
+  VALUES ?t { wd:Q885849 wd:Q721747 }
+  ?i wdt:P31 ?t; wdt:P625 ?coord .
+  OPTIONAL { ?i wdt:P1893 ?opid }
+  OPTIONAL { ?i wdt:P547 ?subj }
+  FILTER(CONTAINS(STR(?coord),"Point(")) 
+  BIND(xsd:decimal(STRBEFORE(STRAFTER(STR(?coord),"Point("), " ")) AS ?lon)
+  BIND(xsd:decimal(STRBEFORE(STRAFTER(STR(?coord)," "), ")")) AS ?lat)
+  FILTER(?lon > -8.7 && ?lon < 2.0 && ?lat > 49.8 && ?lat < 60.9)
+}

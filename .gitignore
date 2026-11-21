@@ -1,0 +1,5 @@
+scripts/work/layers/
+scripts/work/raw/
+scripts/work/private/
+__pycache__/
+*.pyc

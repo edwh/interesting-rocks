@@ -1,0 +1,6 @@
+# {CLASS_CLAUSE} is "?cls wdt:P279* wd:<Q>." (subclass closure) or "VALUES ?cls{wd:<Q>}" for trees (closure times out)
+SELECT ?s ?sLabel ?sDescription ?co ?p ?art ?locLabel ?cls ?clsLabel ?inc WHERE{
+ ?s wdt:P31 ?cls. {CLASS_CLAUSE} ?s wdt:P625 ?co; wdt:P17 wd:Q145. FILTER NOT EXISTS{?s wdt:P131* wd:Q26}
+ OPTIONAL{?s wdt:P18 ?p} OPTIONAL{?s wdt:P131 ?loc} OPTIONAL{?s wdt:P571 ?inc}
+ OPTIONAL{?art schema:about ?s;schema:isPartOf <https://en.wikipedia.org/>}
+ SERVICE wikibase:label{bd:serviceParam wikibase:language "en".}}

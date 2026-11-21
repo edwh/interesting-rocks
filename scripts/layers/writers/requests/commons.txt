@@ -1,0 +1,5 @@
+GET https://commons.wikimedia.org/w/api.php?action=query&list=search&srsearch={text}&srnamespace=6&srlimit=8&format=json
+GET https://commons.wikimedia.org/w/api.php?action=query&list=geosearch&gscoord={lat}|{lon}&gsradius={m}&gsnamespace=6&gslimit=20&format=json
+GET https://commons.wikimedia.org/w/api.php?action=query&titles={File:..|..}&prop=imageinfo|coordinates&iiprop=url|extmetadata|mime&iiurlwidth=1280&coprimary=all&colimit=50&format=json
+Licence accepted: LicenseShortName matching CC BY/CC BY-SA/CC0/Public domain/PD (NC, ND, GFDL rejected)
+Wikipedia: GET https://en.wikipedia.org/w/api.php?action=opensearch&search={name}&limit=3&format=json

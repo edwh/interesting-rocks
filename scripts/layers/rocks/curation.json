@@ -1,0 +1,9 @@
+{
+  "_doc": "Hand curation read by run.py. include_qids: extra Wikidata items to fetch (group in include_qid_group). include: whole hand-written records (need name, group, ll, place, kind, about, url). exclude: qids / ids / name_patterns (regex, case-insensitive) dropped after merge. tier1: qids / names forced to tier 1. group_override: qid -> group.",
+  "include_qids": [],
+  "include_qid_group": {},
+  "include": [],
+  "exclude": {"qids": [], "ids": [], "name_patterns": []},
+  "tier1": {"qids": [], "names": []},
+  "group_override": {}
+}

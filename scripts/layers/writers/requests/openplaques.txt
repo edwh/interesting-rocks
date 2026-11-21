@@ -1,0 +1,2 @@
+GET https://openplaques.org/people/{P1430 id}/plaques.json
+Licence: PDDL 1.0 (https://openplaques.org/data)

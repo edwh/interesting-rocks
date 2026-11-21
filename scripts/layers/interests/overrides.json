@@ -1,0 +1,6 @@
+{
+ "exclude_ids": [],
+ "exclude_names": [],
+ "include_tier1": [],
+ "notes": "hand picks: add src ids (e.g. \"wikidata Q123\") to exclude_ids/include_tier1"
+}

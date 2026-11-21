@@ -1,0 +1,5 @@
+# resolve_authors.py / resolve_places.py / plaques.py (GET)
+https://www.wikidata.org/w/api.php?action=wbsearchentities&search={name}&language=en&limit=8&type=item&format=json
+https://www.wikidata.org/w/api.php?action=wbgetentities&ids={Q|Q|...}&props=claims|sitelinks|labels   (resolve_authors: P31, P106, sitelinks)
+https://www.wikidata.org/w/api.php?action=wbgetentities&ids={Q}&props=labels|descriptions|sitelinks|claims   (place: P625 coordinates, P856 website, enwiki sitelink)
+https://www.wikidata.org/w/api.php?action=wbgetentities&ids={Q|...}&props=claims&format=json   (plaques.py: reads P1430 Open Plaques subject ID)

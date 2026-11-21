@@ -1,0 +1,21 @@
+# Items in a GB bounding box that are instances (or subclass instances) of {ROOT}.
+SELECT ?x ?xLabel ?xDescription ?c ?wp ?p17 ?cat ?dissolved
+  (GROUP_CONCAT(DISTINCT STR(?img);separator="|") AS ?imgs)
+  (GROUP_CONCAT(DISTINCT STRAFTER(STR(?cls),"entity/");separator="|") AS ?classes)
+  (SAMPLE(?locL) AS ?loc)
+WHERE {
+  SERVICE wikibase:box {
+    ?x wdt:P625 ?c .
+    bd:serviceParam wikibase:cornerSouthWest "Point(-8.7 49.8)"^^geo:wktLiteral .
+    bd:serviceParam wikibase:cornerNorthEast "Point(1.9 60.9)"^^geo:wktLiteral .
+  }
+  ?x wdt:P31 ?cls . ?cls wdt:P279* wd:{ROOT} .
+  OPTIONAL { ?x wdt:P18 ?img }
+  OPTIONAL { ?x wdt:P373 ?cat }
+  OPTIONAL { ?x wdt:P17 ?p17 }
+  OPTIONAL { ?x wdt:P576 ?dissolved }
+  OPTIONAL { ?wp schema:about ?x ; schema:isPartOf <https://en.wikipedia.org/> }
+  OPTIONAL { ?x wdt:P131 ?loc0 . ?loc0 rdfs:label ?locL . FILTER(lang(?locL)="en") }
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+}
+GROUP BY ?x ?xLabel ?xDescription ?c ?wp ?p17 ?cat ?dissolved

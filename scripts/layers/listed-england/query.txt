@@ -1,0 +1,7 @@
+GET https://services-eu1.arcgis.com/ZOdPfBS3aqqDYPUQ/arcgis/rest/services/National_Heritage_List_for_England_NHLE_v02_VIEW/FeatureServer/0/query
+  where=Grade IN ('I','II*')
+  outFields=ListEntry,Name,Grade,ListDate,hyperlink,NGR
+  outSR=4326 returnGeometry=true orderByFields=ListEntry
+  resultOffset=0,2000,4000,... resultRecordCount=2000 f=json
+Dataset page: https://opendata-historicengland.hub.arcgis.com/ (National Heritage List for England (NHLE))
+Licence: Open Government Licence v3.0. Attribution: Contains Historic England data © Historic England [year]. Contains Ordnance Survey data © Crown copyright and database right [year].

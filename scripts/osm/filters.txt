@@ -1,0 +1,16 @@
+# Tags kept from the OpenStreetMap extract by scripts/osm/osm_extract.py build.
+# osmium tags-filter syntax, one expression per line. "named:" keeps only objects that also have a name.
+# Add a line when a layer's query needs a tag that is not here, then run: python3 scripts/osm/osm_extract.py build
+
+nwr/historic                       # standing stones, stone circles, holy wells, mines, milestones, guideposts, plaques, Green Man carvings
+nwr/natural=cave_entrance,spring   # caves, wells
+nwr/natural=stone,rock             # rocks: erratics, named boulders
+nwr/geological                     # rocks: outcrops, erratics, palaeontological sites
+nwr/natural=arch,stack,sea_stack   # rocks: natural arches, sea stacks
+n/place=city,town,village,hamlet,suburb,island   # rocks: "near X" labels
+nwr/amenity=holy_well              # wells (older tagging)
+nwr/man_made=water_well            # wells
+nwr/artwork_subject                # Green Man carvings
+nwr/tourism=artwork                # public art
+nwr/tourism=museum,gallery         # museums and galleries
+named:nwr/natural=tree             # notable trees (only named ones: there are millions of street trees)

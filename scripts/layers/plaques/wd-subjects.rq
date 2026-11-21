@@ -1,0 +1,5 @@
+# Open Plaques subject id (P1430) -> Wikidata item and English Wikipedia article
+SELECT ?opid ?s ?art WHERE {
+  ?s wdt:P1430 ?opid .
+  OPTIONAL { ?art schema:about ?s; schema:isPartOf <https://en.wikipedia.org/> . }
+}

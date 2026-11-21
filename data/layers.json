@@ -1,0 +1,559 @@
+[
+ {
+  "key": "goldsworthy",
+  "name": "Andy Goldsworthy",
+  "icon": "cairn",
+  "color": "#e34948",
+  "ink": "#ffffff",
+  "description": "Sheepfolds, arches, cones and other permanent works.",
+  "source": "sheepfoldscumbria.co.uk grid references, Wikimedia Commons, hand placement",
+  "licence": "MIT (this project)",
+  "curated": true,
+  "defaultOn": true,
+  "attribution": "Photos credited individually (Wikimedia Commons, Geograph).",
+  "family": "art",
+  "files": [
+   {
+    "tier": 1,
+    "file": "data/layers/goldsworthy-1.json",
+    "count": 58
+   }
+  ],
+  "count": 58,
+  "photos": 37
+ },
+ {
+  "key": "gormley",
+  "name": "Antony Gormley",
+  "icon": "figure",
+  "color": "#e34948",
+  "ink": "#ffffff",
+  "description": "Iron figures on beaches, hills and rooftops, and the Angel of the North.",
+  "source": "Wikidata, OpenStreetMap, Wikimedia Commons",
+  "licence": "CC0 and ODbL",
+  "curated": true,
+  "defaultOn": true,
+  "fetch": "python3 scripts/layers/sculpture/run.py",
+  "attribution": "© OpenStreetMap contributors (ODbL); Wikidata (CC0); photos credited individually.",
+  "family": "art",
+  "files": [
+   {
+    "tier": 1,
+    "file": "data/layers/gormley-1.json",
+    "count": 25
+   }
+  ],
+  "count": 25,
+  "photos": 19,
+  "fetched": "2026-11-21"
+ },
+ {
+  "key": "landart",
+  "name": "Land art and sculpture trails",
+  "icon": "spiral",
+  "color": "#e34948",
+  "ink": "#ffffff",
+  "description": "Skyspaces, landforms, Panopticons and forest sculpture trails.",
+  "source": "Wikidata, OpenStreetMap, Wikimedia Commons",
+  "licence": "CC0 and ODbL",
+  "curated": true,
+  "defaultOn": true,
+  "fetch": "python3 scripts/layers/sculpture/run.py",
+  "attribution": "© OpenStreetMap contributors (ODbL); Wikidata (CC0); photos credited individually.",
+  "family": "art",
+  "files": [
+   {
+    "tier": 1,
+    "file": "data/layers/landart-1.json",
+    "count": 43
+   }
+  ],
+  "count": 43,
+  "photos": 37,
+  "fetched": "2026-11-21"
+ },
+ {
+  "key": "artwork",
+  "name": "Public art",
+  "icon": "star",
+  "color": "#e34948",
+  "ink": "#ffffff",
+  "description": "Named sculptures, statues and installations recorded in Wikidata and OpenStreetMap (not murals). Highlights have a photo, a Wikipedia article or a Wikidata entry.",
+  "source": "Wikidata; OpenStreetMap; Wikimedia Commons",
+  "licence": "CC0; ODbL 1.0",
+  "attribution": "Wikidata (CC0); © OpenStreetMap contributors (ODbL); photos credited individually.",
+  "compact": true,
+  "defaultOn": true,
+  "fetch": [
+   "node scripts/layers/artwork/fetch.mjs",
+   "scripts/osm/fetch-extract.sh && python3 scripts/osm/osm_extract.py build",
+   "node scripts/layers/artwork/fetch-osm.mjs"
+  ],
+  "dedupe": "near",
+  "family": "art",
+  "files": [
+   {
+    "tier": 1,
+    "file": "data/layers/artwork-1.json",
+    "count": 2247
+   },
+   {
+    "tier": 2,
+    "file": "data/layers/artwork-2.json",
+    "count": 8409
+   }
+  ],
+  "count": 10656,
+  "photos": 2018,
+  "fetched": "2026-11-21"
+ },
+ {
+  "key": "prehistoric",
+  "name": "Stone circles and standing stones",
+  "icon": "stones",
+  "family": "old",
+  "description": "Stone circles, henges, dolmens and notable standing stones.",
+  "source": "Wikidata; OpenStreetMap; Wikimedia Commons",
+  "licence": "CC0; ODbL 1.0",
+  "attribution": "Wikidata (CC0); © OpenStreetMap contributors (ODbL); photos credited individually.",
+  "fetch": "python3 scripts/layers/interests/run.py scripts/work/layers --refetch prehistoric",
+  "defaultOn": true,
+  "color": "#6250d6",
+  "ink": "#ffffff",
+  "files": [
+   {
+    "tier": 1,
+    "file": "data/layers/prehistoric-1.json",
+    "count": 449
+   },
+   {
+    "tier": 2,
+    "file": "data/layers/prehistoric-2.json",
+    "count": 821
+   }
+  ],
+  "count": 1270,
+  "photos": 429,
+  "fetched": "2026-11-21"
+ },
+ {
+  "key": "wells",
+  "name": "Holy wells",
+  "icon": "well",
+  "family": "old",
+  "description": "Holy wells, healing springs and saints' wells.",
+  "source": "Wikidata; OpenStreetMap; Wikimedia Commons",
+  "licence": "CC0 and ODbL",
+  "attribution": "Wikidata (CC0); © OpenStreetMap contributors (ODbL); photos credited individually.",
+  "fetch": "python3 scripts/layers/interests/run.py scripts/work/layers --refetch wells",
+  "defaultOn": true,
+  "color": "#6250d6",
+  "ink": "#ffffff",
+  "files": [
+   {
+    "tier": 1,
+    "file": "data/layers/wells-1.json",
+    "count": 51
+   },
+   {
+    "tier": 2,
+    "file": "data/layers/wells-2.json",
+    "count": 265
+   }
+  ],
+  "count": 316,
+  "photos": 49,
+  "fetched": "2026-11-21"
+ },
+ {
+  "key": "greenman",
+  "name": "Green Men",
+  "icon": "leaf",
+  "family": "old",
+  "description": "Churches with Green Man carvings, found from geotagged photos on Wikimedia Commons. Positions are where the photo was taken.",
+  "source": "Wikimedia Commons",
+  "licence": "Per-photo Commons licences",
+  "attribution": "Photos and positions from Wikimedia Commons, credited individually.",
+  "fetch": "python3 scripts/layers/interests/run.py scripts/work/layers --refetch greenman",
+  "defaultOn": true,
+  "color": "#6250d6",
+  "ink": "#ffffff",
+  "files": [
+   {
+    "tier": 1,
+    "file": "data/layers/greenman-1.json",
+    "count": 109
+   }
+  ],
+  "count": 109,
+  "photos": 109,
+  "fetched": "2026-11-21"
+ },
+ {
+  "key": "follies",
+  "name": "Follies, grottoes and hill figures",
+  "icon": "tower",
+  "family": "old",
+  "description": "Follies, garden grottoes and chalk or turf hill figures.",
+  "source": "Wikidata; Wikimedia Commons",
+  "licence": "CC0",
+  "attribution": "Wikidata (CC0); photos credited individually.",
+  "fetch": "python3 scripts/layers/interests/run.py scripts/work/layers --refetch follies",
+  "defaultOn": true,
+  "color": "#6250d6",
+  "ink": "#ffffff",
+  "files": [
+   {
+    "tier": 1,
+    "file": "data/layers/follies-1.json",
+    "count": 242
+   },
+   {
+    "tier": 2,
+    "file": "data/layers/follies-2.json",
+    "count": 187
+   }
+  ],
+  "count": 429,
+  "photos": 228,
+  "fetched": "2026-11-21"
+ },
+ {
+  "key": "milestones",
+  "name": "Milestones and guide posts",
+  "icon": "fingerpost",
+  "family": "old",
+  "color": "#6250d6",
+  "ink": "#ffffff",
+  "description": "Milestones, mileposts and guide posts on old roads and turnpikes: listed ones in England from Historic England, plus others mapped in OpenStreetMap.",
+  "source": "Historic England National Heritage List (NHLE); OpenStreetMap; Wikimedia Commons",
+  "licence": "Open Government Licence v3.0 and ODbL",
+  "attribution": "Contains Historic England data © Historic England. © OpenStreetMap contributors (ODbL). Photos credited individually.",
+  "compact": true,
+  "defaultOn": false,
+  "defaultAccess": "open",
+  "urls": {
+   "nhle-": "https://historicengland.org.uk/listing/the-list/list-entry/"
+  },
+  "fetch": "python3 scripts/layers/milestones/run.py scripts/work/layers/milestones.json",
+  "files": [
+   {
+    "tier": 1,
+    "file": "data/layers/milestones-1.json",
+    "count": 4424
+   },
+   {
+    "tier": 2,
+    "file": "data/layers/milestones-2.json",
+    "count": 474
+   }
+  ],
+  "count": 4898,
+  "photos": 378,
+  "fetched": "2026-11-21"
+ },
+ {
+  "key": "listed",
+  "name": "Listed buildings",
+  "icon": "columns",
+  "color": "#5b6770",
+  "ink": "#ffffff",
+  "description": "Grade I and II* listed buildings in England; Category A and B in Scotland; Grade I and II* in Wales. Highlights are Grade I and Category A.",
+  "source": "Historic England National Heritage List (NHLE); Historic Environment Scotland; Cadw",
+  "licence": "Open Government Licence v3.0",
+  "attribution": "Contains Historic England data © Historic England. Contains Historic Environment Scotland data © Crown copyright and database right. Designated Historic Asset GIS Data, The Welsh Historic Environment Service (Cadw), licensed under the Open Government Licence v3.0. Contains OS data © Crown copyright and database right.",
+  "compact": true,
+  "defaultOn": true,
+  "urls": {
+   "nhle-": "https://historicengland.org.uk/listing/the-list/list-entry/",
+   "hes-lb": "https://portal.historicenvironment.scot/designation/LB",
+   "cadw-": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?lang=en&id="
+  },
+  "kinds": {
+   "I": "Listed building, Grade I",
+   "II*": "Listed building, Grade II*",
+   "A": "Listed building, Category A",
+   "B": "Listed building, Category B"
+  },
+  "fetch": [
+   "node scripts/layers/listed-england/fetch.mjs scripts/work/layers/listed-england.json",
+   "python3 scripts/layers/listed-scotland/fetch.py scripts/work/layers/listed-scotland.json scripts/work/raw/listed-scotland",
+   "python3 scripts/layers/listed-wales/fetch.py scripts/work/layers/listed-wales.json scripts/work/raw/listed-wales"
+  ],
+  "defaultAccess": "unknown",
+  "family": "listed",
+  "files": [
+   {
+    "tier": 1,
+    "file": "data/layers/listed-1.json",
+    "count": 13304
+   },
+   {
+    "tier": 2,
+    "file": "data/layers/listed-2.json",
+    "count": 47207
+   }
+  ],
+  "count": 60511,
+  "photos": 0,
+  "fetched": "2026-11-21"
+ },
+ {
+  "key": "trees",
+  "name": "Notable trees",
+  "icon": "tree",
+  "family": "nature",
+  "description": "Named ancient and notable trees.",
+  "source": "Wikidata; OpenStreetMap; Wikimedia Commons",
+  "licence": "CC0 and ODbL",
+  "attribution": "Wikidata (CC0); © OpenStreetMap contributors (ODbL); photos credited individually.",
+  "fetch": "python3 scripts/layers/interests/run.py scripts/work/layers --refetch trees",
+  "defaultOn": true,
+  "color": "#008300",
+  "ink": "#ffffff",
+  "files": [
+   {
+    "tier": 1,
+    "file": "data/layers/trees-1.json",
+    "count": 76
+   },
+   {
+    "tier": 2,
+    "file": "data/layers/trees-2.json",
+    "count": 188
+   }
+  ],
+  "count": 264,
+  "photos": 66,
+  "fetched": "2026-11-21"
+ },
+ {
+  "key": "caves",
+  "name": "Caves and show mines",
+  "icon": "cave",
+  "family": "nature",
+  "description": "Show caves and show mines, and named caves and potholes. Most caves need caving skills and kit.",
+  "source": "Wikidata; OpenStreetMap; Wikimedia Commons",
+  "licence": "CC0 and ODbL",
+  "attribution": "Wikidata (CC0); © OpenStreetMap contributors (ODbL); photos credited individually.",
+  "fetch": "python3 scripts/layers/interests/run.py scripts/work/layers --refetch caves",
+  "defaultOn": true,
+  "color": "#008300",
+  "ink": "#ffffff",
+  "files": [
+   {
+    "tier": 1,
+    "file": "data/layers/caves-1.json",
+    "count": 204
+   },
+   {
+    "tier": 2,
+    "file": "data/layers/caves-2.json",
+    "count": 330
+   }
+  ],
+  "count": 534,
+  "photos": 144,
+  "fetched": "2026-11-21"
+ },
+ {
+  "key": "rocks",
+  "name": "Interesting rocks",
+  "icon": "rock",
+  "family": "nature",
+  "color": "#008300",
+  "ink": "#ffffff",
+  "description": "Glacial erratics, tors, natural arches, sea stacks, limestone pavements, fossil sites and other geology worth a look. Highlights have a photo or a Wikipedia article.",
+  "source": "Wikidata; OpenStreetMap; Geological Conservation Review sites from NatureScot and Natural Resources Wales; Limestone Pavement Orders from Natural England; Wikimedia Commons",
+  "licence": "CC0; ODbL 1.0; Open Government Licence v3.0",
+  "attribution": "Wikidata (CC0); © OpenStreetMap contributors (ODbL); contains NatureScot information licensed under the Open Government Licence v3.0; contains Natural Resources Wales information © Natural Resources Wales and database right; © Natural England copyright; contains Ordnance Survey data © Crown copyright and database right; photos credited individually.",
+  "fetch": [
+   "scripts/osm/fetch-extract.sh && python3 scripts/osm/osm_extract.py build",
+   "python3 scripts/layers/rocks/run.py --use-raw"
+  ],
+  "defaultOn": true,
+  "files": [
+   {
+    "tier": 1,
+    "file": "data/layers/rocks-1.json",
+    "count": 508
+   },
+   {
+    "tier": 2,
+    "file": "data/layers/rocks-2.json",
+    "count": 2502
+   }
+  ],
+  "count": 3010,
+  "photos": 467,
+  "fetched": "2026-11-21"
+ },
+ {
+  "key": "writers",
+  "name": "Writers' places",
+  "icon": "book",
+  "color": "#eb6834",
+  "ink": "#ffffff",
+  "description": "Houses, graves, plaques, statues and other places tied to writers.",
+  "source": "Wikidata; Open Plaques; OpenStreetMap (Nominatim) for a few positions; Wikimedia Commons",
+  "licence": "CC0, public domain (Open Plaques) and ODbL",
+  "curated": true,
+  "defaultOn": true,
+  "attribution": "Wikidata (CC0); plaque data from Open Plaques (public domain); some positions © OpenStreetMap contributors (ODbL); photos credited individually.",
+  "family": "people",
+  "fetch": "python3 scripts/layers/writers/run.py   (private inputs in scripts/work/private/writers/)",
+  "files": [
+   {
+    "tier": 1,
+    "file": "data/layers/writers-1.json",
+    "count": 237
+   }
+  ],
+  "count": 237,
+  "photos": 169,
+  "fetched": "2026-11-21"
+ },
+ {
+  "key": "plaques",
+  "name": "Plaques",
+  "icon": "plaque",
+  "family": "people",
+  "color": "#eb6834",
+  "ink": "#ffffff",
+  "description": "Blue, green and other commemorative plaques. Highlights are blue plaques and plaques to people with a Wikipedia article.",
+  "source": "Open Plaques bulk data; Wikidata; OpenStreetMap; Wikimedia Commons",
+  "licence": "Public domain (Open Plaques, PDDL 1.0); CC0; ODbL 1.0 for plaques found only in OpenStreetMap",
+  "attribution": "Plaque data from Open Plaques (public domain); Wikidata (CC0); © OpenStreetMap contributors (ODbL); photos credited individually.",
+  "compact": true,
+  "defaultOn": true,
+  "fetch": "python3 -I scripts/layers/plaques/build_plaques.py scripts/work/layers/plaques.json",
+  "urls": {
+   "op-": "https://openplaques.org/plaques/"
+  },
+  "files": [
+   {
+    "tier": 1,
+    "file": "data/layers/plaques-1.json",
+    "count": 12846
+   },
+   {
+    "tier": 2,
+    "file": "data/layers/plaques-2.json",
+    "count": 8164
+   }
+  ],
+  "count": 21010,
+  "photos": 4245,
+  "fetched": "2026-11-21"
+ },
+ {
+  "key": "warmemorials",
+  "name": "War memorials",
+  "icon": "poppy",
+  "family": "people",
+  "color": "#eb6834",
+  "ink": "#ffffff",
+  "description": "Cenotaphs, crosses, statues, plaques and rolls of honour remembering those who died in war. Highlights have a photo or a Wikipedia article.",
+  "source": "Wikidata; OpenStreetMap; Historic England, Historic Environment Scotland and Cadw listings; Open Plaques; Wikimedia Commons",
+  "licence": "CC0; ODbL 1.0; Open Government Licence v3.0; public domain (Open Plaques)",
+  "attribution": "Wikidata (CC0); © OpenStreetMap contributors (ODbL); listed memorials contain Historic England, Historic Environment Scotland and Cadw data under the Open Government Licence v3.0; Open Plaques (public domain); photos credited individually.",
+  "claims": {
+   "from": [
+    "artwork",
+    "listed",
+    "plaques"
+   ],
+   "name": "\\b(war memorial|cenotaph|roll of hono(u)?r|memorial to the fallen)\\b"
+  },
+  "dedupe": "near",
+  "compact": true,
+  "urls": {
+   "nhle-": "https://historicengland.org.uk/listing/the-list/list-entry/",
+   "hes-lb": "https://portal.historicenvironment.scot/designation/LB",
+   "cadw-": "https://cadwpublic-api.azurewebsites.net/reports/listedbuilding/FullReport?lang=en&id=",
+   "op-": "https://openplaques.org/plaques/"
+  },
+  "fetch": [
+   "scripts/osm/fetch-extract.sh && python3 scripts/osm/osm_extract.py build",
+   "node scripts/layers/warmemorials/fetch.mjs"
+  ],
+  "defaultOn": false,
+  "files": [
+   {
+    "tier": 1,
+    "file": "data/layers/warmemorials-1.json",
+    "count": 5244
+   },
+   {
+    "tier": 2,
+    "file": "data/layers/warmemorials-2.json",
+    "count": 4589
+   }
+  ],
+  "count": 9833,
+  "photos": 5192,
+  "fetched": "2026-11-21"
+ },
+ {
+  "key": "ghostsigns",
+  "name": "Ghost signs",
+  "icon": "ghost",
+  "family": "people",
+  "description": "Faded hand-painted advertisements on walls. Highlights name what the sign advertised.",
+  "source": "Wikimedia Commons (Ghost signs in the United Kingdom); Geograph",
+  "licence": "Per-photo CC licences (mostly CC BY-SA)",
+  "attribution": "Photos and positions from Wikimedia Commons and Geograph, credited individually.",
+  "fetch": "python3 -I scripts/layers/ghostsigns/run.py scripts/work/layers/ghostsigns.json",
+  "defaultOn": true,
+  "color": "#eb6834",
+  "ink": "#ffffff",
+  "files": [
+   {
+    "tier": 1,
+    "file": "data/layers/ghostsigns-1.json",
+    "count": 156
+   },
+   {
+    "tier": 2,
+    "file": "data/layers/ghostsigns-2.json",
+    "count": 955
+   }
+  ],
+  "count": 1111,
+  "photos": 1111,
+  "fetched": "2026-11-21"
+ },
+ {
+  "key": "museums",
+  "name": "Museums and galleries",
+  "icon": "frame",
+  "family": "museums",
+  "color": "#2a6fb0",
+  "ink": "#ffffff",
+  "description": "Museums and public galleries mapped in OpenStreetMap, with photos and Wikipedia links from Wikidata. Highlights have a photo, a Wikipedia article or a Wikidata entry.",
+  "source": "OpenStreetMap; Wikidata; Wikimedia Commons",
+  "licence": "ODbL 1.0; CC0",
+  "attribution": "© OpenStreetMap contributors (ODbL); Wikidata (CC0); photos credited individually.",
+  "compact": true,
+  "fetch": [
+   "scripts/osm/fetch-extract.sh && python3 scripts/osm/osm_extract.py build",
+   "node scripts/layers/museums/fetch.mjs"
+  ],
+  "defaultOn": true,
+  "files": [
+   {
+    "tier": 1,
+    "file": "data/layers/museums-1.json",
+    "count": 2170
+   },
+   {
+    "tier": 2,
+    "file": "data/layers/museums-2.json",
+    "count": 2023
+   }
+  ],
+  "count": 4193,
+  "photos": 1485,
+  "fetched": "2026-11-21"
+ }
+]

@@ -37,7 +37,19 @@ h1 { font: 600 28px/1.1 var(--serif); margin: 0 0 6px; text-wrap: balance; lette
 .filters { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 14px }
 .chip { padding: 5px 10px; display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; background: var(--panel); border: 1px solid var(--rule); border-radius: 4px; cursor: pointer }
 .chip[aria-pressed="false"] { opacity: .5 }
-.export { display: flex; align-items: center; gap: 10px; margin-top: 12px; font-size: 13px; color: var(--muted) }
+.export { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 12px; font-size: 13px; color: var(--muted) }
+.search { display: block; margin-top: 14px }
+.search input { width: 100%; font: inherit; font-size: 15px; padding: 9px 12px; border: 1px solid var(--rule); border-radius: 5px; background: var(--bg); color: var(--ink) }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap }
+.chip.layer { gap: 7px }
+.filters.layers { display: block }
+.fam { font: 500 11px var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 12px 0 6px }
+.famrow { display: flex; flex-wrap: wrap; gap: 6px }
+.chip .tick { width: 16px; height: 16px; border-radius: 50%; background: var(--ink); color: var(--panel); font: 700 10px/16px var(--sans); text-align: center }
+.chip .lc { font: 12px var(--mono); color: var(--muted) }
+.filters.layers + .filters { margin-top: 8px }
+.livestatus { margin: 8px 0 0; font-size: 13px; color: var(--muted) }
+.empty { padding: 16px 20px; color: var(--muted); font-size: 14px; margin: 0 }
 .btn.small { padding: 6px 12px; font-size: 13px }
 
 .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex: none }
@@ -46,7 +58,7 @@ h1 { font: 600 28px/1.1 var(--serif); margin: 0 0 6px; text-wrap: balance; lette
 .dot.visited { background: var(--visited) }
 
 .region h3 { font: 500 11px var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0; padding: 16px 20px 6px; position: sticky; top: 0; background: var(--panel); z-index: 1 }
-.item { display: grid; grid-template-columns: 12px 1fr auto; gap: 10px; align-items: baseline; width: 100%; text-align: left; border: 0; background: none; padding: 8px 20px; cursor: pointer; border-top: 1px solid var(--rule) }
+.item { display: grid; grid-template-columns: 16px 1fr auto; gap: 10px; align-items: center; width: 100%; text-align: left; border: 0; background: none; padding: 8px 20px; cursor: pointer; border-top: 1px solid var(--rule) }
 .item:hover { background: var(--bg) }
 .item .nm { font-weight: 500 } .item .pl { display: block; color: var(--muted); font-size: 13px }
 .item .tag { font: 12px var(--mono); color: var(--muted); white-space: nowrap }
@@ -54,13 +66,20 @@ h1 { font: 600 28px/1.1 var(--serif); margin: 0 0 6px; text-wrap: balance; lette
 .foot { padding: 18px 20px 28px; font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--rule) }
 .foot a { color: var(--muted) }
 
-/* Map pins */
-.pin { width: 16px; height: 16px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,.45); display: grid; place-items: center; color: #fff; font: 700 10px/1 var(--sans) }
-.pin.open { background: #3f6b35 } .pin.limited { background: #b07a17 }
-.pin.gone { background: #fff; border: 2px dashed #6b716a }
-.pin.multi { width: 20px; height: 20px }
-.pin.visited { background: #a5442b; border-color: #fff }
-.pin.visited::after { content: "\2713" }
+/* Map pins: fill is the layer colour, the glyph names the layer, the border shows access. */
+.pin { width: 20px; height: 20px; border-radius: 50%; background: var(--c); color: var(--k); border: 2px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,.45); display: grid; place-items: center; position: relative; box-sizing: border-box }
+.pin svg { display: block }
+.pin.multi { width: 24px; height: 24px }
+.pin.limited { box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--c), 0 1px 5px rgba(0,0,0,.4) }
+.pin.mini.limited { box-shadow: 0 0 0 1.5px var(--panel), 0 0 0 3px var(--c) }
+.pin.gone { background: #fff; color: var(--c); border: 2px dashed var(--c) }
+.pin.visited::after { content: "\2713"; position: absolute; top: -6px; right: -7px; width: 13px; height: 13px; border-radius: 50%; background: #1d2320; color: #fff; font: 700 9px/13px var(--sans); text-align: center; border: 1.5px solid #fff }
+.pin.wanted::before { content: "\2605"; position: absolute; top: -7px; left: -7px; width: 13px; height: 13px; border-radius: 50%; background: #eda100; color: #1d2320; font: 700 9px/13px var(--sans); text-align: center; border: 1.5px solid #fff }
+.pin.mini { width: 16px; height: 16px; border-width: 1.5px; box-shadow: none; flex: none }
+.pin.mini.visited::after, .pin.mini.wanted::before { display: none }
+.chip .tick.star { background: #eda100; color: #1d2320 }
+#m-want[aria-pressed="true"] { border-color: #eda100 }
+.cluster { display: grid; place-items: center; border-radius: 50%; background: rgba(29,35,32,.82); color: #fff; font: 600 12px var(--sans); border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,.4) }
 .leaflet-tooltip { font: 500 12px var(--sans) }
 
 .listtoggle { display: none }
@@ -76,13 +95,16 @@ dialog::backdrop { background: rgba(15, 20, 17, .55) }
 .credit { margin: 0; padding: 6px 20px; font-size: 11.5px; color: var(--muted); border-bottom: 1px solid var(--rule) }
 .credit a { color: var(--muted) }
 .m-body { padding: 16px 20px 20px }
-.eyebrow { font: 500 11px var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--sand) }
+.eyebrow { font: 500 11px var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 6px }
+.eyebrow::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--c, var(--sand)) }
 h2 { font: 600 24px/1.2 var(--serif); margin: 4px 40px 2px 0; text-wrap: balance }
 .m-place { margin: 0 0 10px; color: var(--muted) }
 .m-about, .m-note { margin: 0 0 10px; max-width: 62ch }
 .m-note { font-size: 14px; color: var(--muted) }
 .meta { display: grid; grid-template-columns: auto 1fr; gap: 2px 14px; font-size: 13px; margin: 12px 0 16px }
 .meta dt { color: var(--muted) } .meta dd { margin: 0 } .mono { font-family: var(--mono); font-size: 12.5px }
+.m-data { margin: -6px 0 16px; font-size: 12px; color: var(--muted); max-width: 62ch }
+.meta a { color: var(--ink) }
 .actions { display: flex; flex-wrap: wrap; gap: 8px }
 .btn { padding: 9px 14px; border-radius: 5px; border: 1px solid var(--rule); background: var(--bg); font-weight: 500; font-size: 14px; text-decoration: none; color: var(--ink); cursor: pointer }
 .btn.primary { background: var(--open); border-color: var(--open); color: #fff }
@@ -100,3 +122,83 @@ dialog.nophoto .close { background: var(--bg); color: var(--ink) }
   .listtoggle[aria-expanded="true"] { bottom: calc(72% + 12px) }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important } }
+
+/* Places near: a starting point and a distance, floating over the top of the map. */
+.from { position: absolute; z-index: 800; top: 12px; right: 12px; width: min(380px, calc(100% - 70px)); font-size: 14px }
+.from-bar { display: flex; background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; box-shadow: 0 1px 6px rgba(0,0,0,.2); overflow: hidden }
+.from-bar input { flex: 1; min-width: 0; font: inherit; font-size: 15px; padding: 9px 12px; border: 0; background: transparent; color: var(--ink) }
+.from-bar input:focus-visible { outline: none }
+.from-bar:focus-within { outline: 2px solid var(--sand); outline-offset: 1px }
+.from-me { flex: none; width: 42px; border: 0; border-left: 1px solid var(--rule); background: transparent; color: var(--ink); display: grid; place-items: center; cursor: pointer }
+.from-me:hover { background: var(--bg) }
+.from-me:disabled { opacity: .5; cursor: progress }
+.from-me.blocked { color: var(--muted) }
+.from-sugg { list-style: none; margin: 4px 0 0; padding: 4px 0; background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; box-shadow: 0 4px 16px rgba(0,0,0,.2); max-height: 50vh; overflow-y: auto }
+.from-sugg li { display: grid; grid-template-columns: 16px 1fr; gap: 10px; align-items: center; padding: 7px 12px; cursor: pointer }
+.from-sugg li:hover, .from-sugg li[aria-selected="true"] { background: var(--bg) }
+.from-sugg b { display: block; font-weight: 500 }
+.from-sugg small { display: block; color: var(--muted); font-size: 12.5px }
+.placedot { width: 10px; height: 10px; margin: 0 3px; border-radius: 50%; border: 2px solid var(--ink) }
+.from-range { margin-top: 6px; padding: 8px 12px 10px; background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; box-shadow: 0 1px 6px rgba(0,0,0,.2) }
+.from-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-weight: 500 }
+.from-clear { flex: none; width: 26px; height: 26px; padding: 0; border-radius: 50%; border: 1px solid var(--rule); background: var(--bg); display: grid; place-items: center; cursor: pointer }
+.from-range input[type=range] { width: 100%; margin: 8px 0 0; accent-color: var(--sand) }
+.linkbtn { border: 0; background: none; padding: 0; font-size: 13px; font-weight: 500; color: var(--sand); cursor: pointer; text-decoration: underline; text-underline-offset: 2px }
+.linkbtn:disabled { color: var(--muted); text-decoration: none; cursor: default; opacity: .6 }
+@media (max-width: 760px) {
+  .from { left: 56px; right: 12px; width: auto; top: calc(10px + env(safe-area-inset-top)) }
+}
+
+/* Filters: their own bar under the search, as on/off toggles (filled when on), unlike the layer chips. */
+.filterbar { display: grid; gap: 8px; margin-top: 12px }
+.fgroup { display: grid; grid-template-columns: 52px 1fr; align-items: start; gap: 8px }
+.flabel { font: 500 11px/28px var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted) }
+.frow { display: flex; flex-wrap: wrap; gap: 6px }
+.toggle { display: inline-flex; align-items: center; gap: 6px; min-height: 28px; padding: 3px 12px; border-radius: 999px; border: 1px solid var(--rule); background: transparent; color: var(--ink); font-size: 13px; font-weight: 500; cursor: pointer; white-space: nowrap }
+.toggle[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--panel) }
+.toggle[aria-pressed="true"]::before { content: "\2713"; font-weight: 700; font-size: 11px }
+.toggle .lc { font: 12px var(--mono); color: inherit; opacity: .75 }
+.toggle .pin.mini { width: 13px; height: 13px }
+.toggle[aria-pressed="true"] .pin.mini { --c: var(--panel) !important; border-color: var(--panel) }
+
+/* Search with the Filters button on its right; filters open below it. */
+.searchrow { display: flex; gap: 8px; margin-top: 14px }
+.searchrow .search { flex: 1; margin: 0 }
+.filterbtn { flex: none; display: inline-flex; align-items: center; gap: 6px; padding: 0 12px; border: 1px solid var(--rule); border-radius: 5px; background: var(--panel); font-weight: 500; font-size: 14px; cursor: pointer }
+.filterbtn[aria-expanded="true"] { background: var(--ink); border-color: var(--ink); color: var(--panel) }
+.filterbtn .badge:not(:empty) { min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; background: var(--sand); color: #fff; font: 600 11px/18px var(--sans); text-align: center }
+.filterbar[hidden] { display: none }
+.filterbar { padding: 10px 12px; border: 1px solid var(--rule); border-radius: 6px; background: var(--bg) }
+
+/* Layers: one line with the count and All on / All off, a finder, then folded groups. */
+.layerhead { display: flex; align-items: center; gap: 8px; margin-top: 16px }
+.layerhead .fam { margin: 0 }
+.layerhead .lsum { flex: 1; font-size: 13px; color: var(--muted) }
+.btn.tiny { padding: 4px 10px; font-size: 12.5px }
+.btn:disabled { opacity: .45; cursor: default }
+.layerfind { display: block; margin-top: 8px }
+.layerfind input { width: 100%; font: inherit; font-size: 14px; padding: 7px 10px; border: 1px solid var(--rule); border-radius: 5px; background: var(--bg); color: var(--ink) }
+.layers { margin-top: 6px }
+.famgroup { border-bottom: 1px solid var(--rule) }
+.famgroup summary { display: flex; align-items: center; gap: 8px; padding: 10px 0; cursor: pointer; list-style: none; font-weight: 500 }
+.famgroup summary::-webkit-details-marker { display: none }
+.famgroup .famname { flex: 1; min-width: 0 }
+.famgroup .lsum { font-size: 12.5px; color: var(--muted); font-weight: 400; white-space: nowrap }
+.fampins { display: flex; gap: 2px }
+.fampins .pin.mini { width: 14px; height: 14px; border-width: 1px }
+.fampins .pin.mini svg { width: 8px; height: 8px }
+.pin.mini.off { opacity: .3 }
+.chev { color: var(--muted); transition: transform .2s; flex: none }
+.famgroup[open] .chev { transform: rotate(180deg) }
+.famgroup .famrow { padding: 0 0 12px }
+.empty.tight { padding: 8px 0 }
+
+@media (max-width: 760px) {
+  header { padding-top: 14px }
+  h1 { font-size: 22px; margin-bottom: 2px }
+  .lede { display: none }
+  .famgroup summary { padding: 12px 0 }
+  .fampins { display: none }
+  .toggle { min-height: 34px; padding: 5px 14px; font-size: 14px }
+  .flabel { line-height: 34px }
+}

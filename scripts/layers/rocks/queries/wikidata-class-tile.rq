@@ -1,0 +1,11 @@
+# Items of {ROOT} (or a subclass) in one box; used when the whole-GB query (wikidata-class.rq) times out.
+# Details for the items found are then fetched with wikidata-qids.rq.
+SELECT DISTINCT ?x WHERE {
+  { SELECT DISTINCT ?cls WHERE { ?cls wdt:P279* wd:{ROOT} . } }
+  SERVICE wikibase:box {
+    ?x wdt:P625 ?c .
+    bd:serviceParam wikibase:cornerSouthWest "Point({WEST} {SOUTH})"^^geo:wktLiteral .
+    bd:serviceParam wikibase:cornerNorthEast "Point({EAST} {NORTH})"^^geo:wktLiteral .
+  }
+  ?x wdt:P31 ?cls .
+}

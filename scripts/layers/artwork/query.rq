@@ -1,0 +1,8 @@
+SELECT ?item ?itemLabel ?itemDescription ?loc ?image ?creatorLabel ?inception ?article WHERE {
+  ?item wdt:P31 wd:{TYPE}; wdt:P17 wd:Q145; wdt:P625 ?loc.
+  OPTIONAL { ?item wdt:P18 ?image }
+  OPTIONAL { ?item wdt:P170 ?creator }
+  OPTIONAL { ?item wdt:P571 ?inception }
+  OPTIONAL { ?article schema:about ?item; schema:isPartOf <https://en.wikipedia.org/> }
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+}

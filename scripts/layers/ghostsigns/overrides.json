@@ -1,0 +1,5 @@
+{
+ "_note": "Hand curation read by build.py. Keys are Commons file titles (with 'File:') or geograph ids.",
+ "exclude": ["File:Hillmorton Locks - geograph.org.uk - 689485.jpg"],
+ "merge": []
+}

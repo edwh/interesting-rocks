@@ -1,0 +1,257 @@
+{
+ "nominatim.Q": {
+  "Thornton Brontë birthplace Market Street": "Brontë Birthplace, Market Street, Thornton, Bradford",
+  "St Mary's Church Scarborough Anne Brontë grave": "St Mary's Church, Scarborough",
+  "Charles Dickens' Birthplace Museum Portsmouth": "Charles Dickens Birthplace Museum, Portsmouth",
+  "The Old Curiosity Shop London": "Old Curiosity Shop, Portsmouth Street, London",
+  "Restoration House Rochester": "Restoration House, Crow Lane, Rochester",
+  "Hardy's Cottage": "Hardy's Cottage, Higher Bockhampton, Dorchester",
+  "St Michael's Church Stinsford": "St Michael's Church, Stinsford, Dorchester",
+  "Steventon St Nicholas church Hampshire": "St Nicholas Church, Steventon, Hampshire",
+  "Statue of George Eliot Nuneaton": "George Eliot statue, Newdegate Square, Nuneaton",
+  "Salisbury Cathedral Close": "The Close, Salisbury",
+  "Emsworth Hampshire Threepwood": "Record Road? Emsworth",
+  "St Nicholas Church Tolleshunt D'Arcy": "St Nicholas Church, Tolleshunt D'Arcy",
+  "John Buchan Story Museum Peebles": "John Buchan Story Museum, Peebles",
+  "The John Buchan Centre Broughton": "John Buchan Centre, Broughton, Biggar",
+  "Elsfield church Oxfordshire": "Church of St Thomas of Canterbury, Elsfield",
+  "Scott's View Borders": "Scott's View, Bemersyde, Melrose",
+  "The Writers' Museum Edinburgh": "The Writers' Museum, Lawnmarket, Edinburgh",
+  "17 Heriot Row Edinburgh": "17 Heriot Row, Edinburgh",
+  "Hall's Croft Stratford": "Hall's Croft, Old Town, Stratford-upon-Avon",
+  "Statue of William Shakespeare Leicester Square": "Shakespeare statue, Leicester Square, London",
+  "Southwark Cathedral Shakespeare memorial": "Southwark Cathedral, London",
+  "St Teresa's Catholic Church Beaconsfield": "St Teresa of Avila Catholic Church, Beaconsfield",
+  "Shipley Windmill": "Shipley Windmill, West Sussex",
+  "All Saints Church Daresbury": "All Saints Church, Daresbury",
+  "Alice's Shop Oxford": "Alice's Shop, St Aldate's, Oxford",
+  "Alice in Wonderland statue Llandudno": "Alice in Wonderland sculpture, West Shore, Llandudno",
+  "James Gillespie's High School Edinburgh": "James Gillespie's High School, Edinburgh",
+  "Greenway Devon National Trust": "Greenway, Galmpton, Devon",
+  "Statue of Sherlock Holmes Crowborough": "Sherlock Holmes statue, Crowborough",
+  "All Saints Church Minstead": "All Saints Church, Minstead",
+  "Statue of Sherlock Holmes Picardy Place Edinburgh": "Sherlock Holmes statue, Picardy Place, Edinburgh",
+  "All Saints Church Sutton Courtenay": "All Saints Church, Sutton Courtenay",
+  "The Wigan Pier": "Wigan Pier, Wigan",
+  "The Stores Wallington Hertfordshire Orwell": "The Stores, Wallington, Baldock",
+  "Hogarth House Richmond": "Hogarth House, Paragon Road? Richmond upon Thames",
+  "Talland House St Ives": "Talland House, St Ives, Cornwall",
+  "Canley Crematorium Coventry": "Canley Crematorium, Coventry",
+  "Hill Top Sawrey": "Hill Top, Near Sawrey, Hawkshead",
+  "Beatrix Potter Gallery Hawkshead": "Beatrix Potter Gallery, Hawkshead",
+  "Eagle and Child Oxford": "Eagle and Child, St Giles, Oxford",
+  "The Kilns Oxford": "The Kilns, Lewis Close, Headington, Oxford",
+  "C. S. Lewis Square Belfast": "C. S. Lewis Square, Belfast",
+  "Oscar Wilde Memorial Sculpture Merrion Square": "Oscar Wilde Memorial Sculpture, Merrion Square, Dublin",
+  "1 Merrion Square Dublin": "1 Merrion Square North, Dublin",
+  "Bunyan Museum Bedford": "Bunyan Museum, Mill Street, Bedford",
+  "Moot Hall Elstow": "Moot Hall, Elstow",
+  "Blake's Cottage Felpham": "Blake's Cottage, Felpham",
+  "Marlowe Theatre Canterbury": "Marlowe Theatre, Canterbury",
+  "Marlowe Memorial Canterbury": "The Marlowe Memorial, Buttermarket, Canterbury",
+  "Chaucer statue Canterbury": "Chaucer Statue, Canterbury",
+  "Brook Street Chapel Knutsford": "Brook Street Chapel, Knutsford",
+  "Bull House Lewes": "Bull House, High Street, Lewes",
+  "St Mary's Church Eversley": "St Mary's Church, Eversley",
+  "St Julian's Church Norwich Julian Shrine": "Church of St Julian, St Julian's Alley, Norwich",
+  "St Andrew's Church Mells": "St Andrew's Church, Mells",
+  "Holy Trinity Church Slad": "Holy Trinity Church, Slad",
+  "The Woolpack Inn Slad": "Woolpack Inn, Slad",
+  "D. H. Lawrence Birthplace Museum": "D H Lawrence Birthplace Museum, Eastwood",
+  "The Bookshop Wigtown": "The Bookshop, North Main Street, Wigtown",
+  "Òran Mór Glasgow": "Òran Mór, Byres Road, Glasgow",
+  "St Andrew's Church Farnham": "St Andrew's Church, Farnham, Surrey",
+  "Burke grave St Mary and All Saints Beaconsfield": "St Mary and All Saints Church, Beaconsfield"
+ },
+ "nominatim2.Q": {
+  "Thornton Brontë birthplace Market Street": [
+   "Brontë Birthplace Thornton",
+   "74 Market Street Thornton Bradford"
+  ],
+  "St Michael's Church Stinsford": [
+   "Stinsford Church",
+   "Church of St Michael Stinsford"
+  ],
+  "Statue of George Eliot Nuneaton": [
+   "George Eliot Nuneaton statue",
+   "Newdegate Square Nuneaton"
+  ],
+  "The John Buchan Centre Broughton": [
+   "John Buchan Centre",
+   "Broughton Biggar museum"
+  ],
+  "Elsfield church Oxfordshire": [
+   "St Thomas of Canterbury Elsfield",
+   "Elsfield church"
+  ],
+  "Scott's View Borders": [
+   "Scott's View",
+   "Scotts View Bemersyde"
+  ],
+  "The Writers' Museum Edinburgh": [
+   "Writers' Museum Edinburgh",
+   "Lady Stair's House Edinburgh"
+  ],
+  "Statue of William Shakespeare Leicester Square": [
+   "Shakespeare statue Leicester Square",
+   "Leicester Square Gardens"
+  ],
+  "St Teresa's Catholic Church Beaconsfield": [
+   "St Teresa's Church Beaconsfield",
+   "Catholic church Station Road Beaconsfield"
+  ],
+  "Shipley Windmill": [
+   "Shipley Windmill",
+   "King's Land Shipley West Sussex"
+  ],
+  "Alice in Wonderland statue Llandudno": [
+   "Alice in Wonderland Llandudno West Shore",
+   "White Rabbit statue Llandudno"
+  ],
+  "Statue of Sherlock Holmes Crowborough": [
+   "Sherlock Holmes statue Crowborough",
+   "Crowborough Beacon Sherlock Holmes statue"
+  ],
+  "Statue of Sherlock Holmes Picardy Place Edinburgh": [
+   "Sherlock Holmes statue Edinburgh",
+   "Picardy Place Edinburgh"
+  ],
+  "The Stores Wallington Hertfordshire Orwell": [
+   "Wallington Hertfordshire Orwell cottage",
+   "Kits Lane Wallington"
+  ],
+  "Hogarth House Richmond": [
+   "Hogarth House",
+   "Hogarth House Paragon Richmond Hounslow"
+  ],
+  "Hill Top Sawrey": [
+   "Hill Top Near Sawrey",
+   "Hill Top Beatrix Potter"
+  ],
+  "The Kilns Oxford": [
+   "The Kilns Headington",
+   "C.S. Lewis Nature Reserve Kiln Lane"
+  ],
+  "C. S. Lewis Square Belfast": [
+   "C S Lewis Square",
+   "Lewis Square Belfast Newtownards Road"
+  ],
+  "Oscar Wilde Memorial Sculpture Merrion Square": [
+   "Oscar Wilde statue Merrion Square",
+   "Merrion Square Park"
+  ],
+  "Marlowe Memorial Canterbury": [
+   "Marlowe Memorial",
+   "Buttermarket Canterbury"
+  ],
+  "Chaucer statue Canterbury": [
+   "Chaucer statue Canterbury",
+   "Canterbury Tales visitor attraction"
+  ],
+  "St Julian's Church Norwich Julian Shrine": [
+   "Julian of Norwich Shrine",
+   "St Julian's Church Norwich"
+  ],
+  "Greenway Devon National Trust": [
+   "Greenway House Churston",
+   "Greenway Quay Galmpton"
+  ],
+  "St Mary's Church Eversley": [
+   "Eversley church Hampshire",
+   "Eversley Hampshire St Mary"
+  ],
+  "St Andrew's Church Farnham": [
+   "St Andrew Farnham church",
+   "Church Lane Farnham parish church"
+  ]
+ },
+ "stageA.DROP": [
+  "Alice in Wonderland statue Llandudno",
+  "Chaucer statue Canterbury",
+  "Elsfield church Oxfordshire",
+  "Emsworth Hampshire Threepwood",
+  "Greenway Devon National Trust",
+  "Hogarth House Richmond",
+  "James Gillespie's High School Edinburgh",
+  "Salisbury Cathedral Close",
+  "Shipley Windmill",
+  "St Mary's Church Eversley",
+  "Statue of George Eliot Nuneaton",
+  "Statue of Sherlock Holmes Crowborough",
+  "Talland House St Ives X",
+  "The John Buchan Centre Broughton",
+  "The Stores Wallington Hertfordshire Orwell"
+ ],
+ "stageA.WDQ": {
+  "Statue of William Shakespeare Leicester Square": "Q17984957",
+  "Hall's Croft Stratford": "Q3126016",
+  "Statue of Sherlock Holmes Picardy Place Edinburgh": "Q51804761",
+  "The Kilns Oxford": "Q7744401",
+  "The Writers' Museum Edinburgh": "Q8038444"
+ },
+ "stageA.NOMOVR": {
+  "Hardy's Cottage": "Hardy's Cottage, Higher Bockhampton",
+  "Dulwich College": null
+ },
+ "stageA.XY": {
+  "Oscar Wilde Memorial Sculpture Merrion Square": [
+   53.3409,
+   -6.2515
+  ],
+  "Greenway Devon National Trust": null
+ },
+ "stageD.NAMEFIX": {
+  "Thornton Brontë birthplace Market Street": "Brontë Birthplace, Thornton",
+  "St Mary's Church Scarborough Anne Brontë grave": "St Mary's Church, Scarborough",
+  "Charles Dickens' Birthplace Museum Portsmouth": "Charles Dickens' Birthplace Museum",
+  "The Old Curiosity Shop London": "The Old Curiosity Shop",
+  "Restoration House Rochester": "Restoration House, Rochester",
+  "Hardy's Cottage": "Hardy's Cottage",
+  "St Michael's Church Stinsford": "St Michael's Church, Stinsford",
+  "Steventon St Nicholas church Hampshire": "St Nicholas Church, Steventon",
+  "St Nicholas Church Tolleshunt D'Arcy": "St Nicholas Church, Tolleshunt D'Arcy",
+  "John Buchan Story Museum Peebles": "John Buchan Story Museum",
+  "Scott's View Borders": "Scott's View",
+  "The Writers' Museum Edinburgh": "The Writers' Museum",
+  "17 Heriot Row Edinburgh": "17 Heriot Row",
+  "Hall's Croft Stratford": "Hall's Croft",
+  "Southwark Cathedral Shakespeare memorial": "Southwark Cathedral",
+  "All Saints Church Daresbury": "All Saints Church, Daresbury",
+  "Alice's Shop Oxford": "Alice's Shop",
+  "All Saints Church Minstead": "All Saints Church, Minstead",
+  "All Saints Church Sutton Courtenay": "All Saints Church, Sutton Courtenay",
+  "The Wigan Pier": "Wigan Pier",
+  "Talland House St Ives": "Talland House",
+  "Canley Crematorium Coventry": "Canley Crematorium",
+  "Hill Top Sawrey": "Hill Top",
+  "Beatrix Potter Gallery Hawkshead": "Beatrix Potter Gallery",
+  "Eagle and Child Oxford": "The Eagle and Child",
+  "The Kilns Oxford": "The Kilns",
+  "C. S. Lewis Square Belfast": "C. S. Lewis Square",
+  "Oscar Wilde Memorial Sculpture Merrion Square": "Oscar Wilde Memorial Sculpture",
+  "1 Merrion Square Dublin": "Oscar Wilde House, 1 Merrion Square",
+  "Bunyan Museum Bedford": "Bunyan Museum",
+  "Moot Hall Elstow": "Moot Hall, Elstow",
+  "Blake's Cottage Felpham": "Blake's Cottage",
+  "Marlowe Theatre Canterbury": "Marlowe Theatre",
+  "Marlowe Memorial Canterbury": "Marlowe Memorial",
+  "Brook Street Chapel Knutsford": "Brook Street Chapel, Knutsford",
+  "Bull House Lewes": "Bull House, Lewes",
+  "St Julian's Church Norwich Julian Shrine": "St Julian's Church, Norwich",
+  "St Andrew's Church Mells": "St Andrew's Church, Mells",
+  "Holy Trinity Church Slad": "Holy Trinity Church, Slad",
+  "The Woolpack Inn Slad": "The Woolpack, Slad",
+  "D. H. Lawrence Birthplace Museum": "D. H. Lawrence Birthplace Museum",
+  "The Bookshop Wigtown": "The Bookshop, Wigtown",
+  "Òran Mór Glasgow": "Òran Mór",
+  "St Andrew's Church Farnham": "St Andrew's Church, Farnham",
+  "Burke grave St Mary and All Saints Beaconsfield": "St Mary and All Saints, Beaconsfield",
+  "Statue of Sherlock Holmes Picardy Place Edinburgh": "Statue of Sherlock Holmes, Picardy Place",
+  "St Teresa's Catholic Church Beaconsfield": "St Teresa's, Beaconsfield",
+  "Emsworth Hampshire Threepwood": "Emsworth",
+  "Dulwich College": "Dulwich College",
+  "Reading Gaol": "Reading Gaol",
+  "Max Gate": "Max Gate",
+  "Dickens House Museum Broadstairs": "Dickens House Museum"
+ }
+}

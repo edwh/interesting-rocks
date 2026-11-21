@@ -1,0 +1,5 @@
+Exploratory only (not used by build_writers.py): used to discover candidate places; superseded by data/places_specs.txt.
+Per relation (burial P119, residence P551, birth P19, death P20, work P937, reverse P138/P547/P825/P921):
+SELECT ?a ?item ?coord ?country ?heritage ?web WHERE { VALUES ?a {wd:Q..} ?a wdt:P119 ?item . ?item wdt:P625 ?coord .
+ OPTIONAL{?item wdt:P17 ?country} OPTIONAL{?item wdt:P1435 ?heritage} OPTIONAL{?item wdt:P856 ?web} }
+Endpoint: https://query.wikidata.org/sparql  (20 authors per VALUES chunk). Script: writer-scripts/places2.py
