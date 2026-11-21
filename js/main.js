@@ -461,13 +461,30 @@ map.on('moveend', () => { if (!query && !near) renderList(); });
 // Phone list sheet
 const sheet = $('side');
 const toggle = $('listtoggle');
-function closeSheet() { sheet.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); toggle.textContent = 'List'; }
+// On phones the list is a sheet over the map: the List button opens it; the close button, a tap on the
+// handle, or a swipe down on the handle closes it.
+function closeSheet() { sheet.classList.remove('open'); sheet.style.transform = ''; toggle.setAttribute('aria-expanded', 'false'); toggle.hidden = false; }
 toggle.onclick = () => {
-  const open = !sheet.classList.contains('open');
-  sheet.classList.toggle('open', open);
-  toggle.setAttribute('aria-expanded', String(open));
-  toggle.textContent = open ? 'Map' : 'List';
+  sheet.classList.add('open');
+  toggle.setAttribute('aria-expanded', 'true');
+  toggle.hidden = true;
+  $('sheetclose').focus({ preventScroll: true });
 };
+$('sheetclose').onclick = closeSheet;
+let dragY = null, dragDy = 0;
+const bar = $('sheetbar');
+bar.addEventListener('touchstart', e => { dragY = e.touches[0].clientY; dragDy = 0; sheet.style.transition = 'none'; }, { passive: true });
+bar.addEventListener('touchmove', e => {
+  if (dragY === null) return;
+  dragDy = Math.max(0, e.touches[0].clientY - dragY);
+  sheet.style.transform = `translateY(${dragDy}px)`;
+}, { passive: true });
+bar.addEventListener('touchend', () => {
+  sheet.style.transition = '';
+  if (dragDy > 70) closeSheet(); else sheet.style.transform = '';
+  dragY = null;
+});
+$('sheethandle').onclick = () => { if (dragDy < 5) closeSheet(); };
 
 addEventListener('storage', e => {
   if (e.key === visited.key) { visited.reload(); refreshAll(); }

@@ -16,6 +16,9 @@ link of the form `#tilberthwaite-touchstone-fold`.
   turned on. Layer choices and open groups are remembered in the browser.
 - **Places near:** search a town or postcode (or use your location), then set how far to look with the
   slider, as the crow flies. The list then shows everything within that distance, nearest first.
+- **Last seen** on each place card: the latest evidence it still exists, which is the date of the newest
+  photo of it, an OpenStreetMap survey date (`check_date`, `survey:date`), or your own visit. Evidence over
+  ten years old is flagged. Upload and edit dates don't count.
 - **Filters** (behind the Filters button): highlights only, hide visited, your wishlist, and access.
 - **Highlights only** shows the most interesting places in each layer: those with a photo, a Wikipedia
   article or a top grade (Grade I, Category A). Turn it off to see everything.
@@ -42,8 +45,10 @@ python3 -I scripts/layers/ghostsigns/run.py scripts/work/layers/ghostsigns.json
 python3 scripts/layers/interests/layers.py wells scripts/work/layers/wells.json --refetch
 python3 scripts/layers/interests/run.py scripts/work/layers --refetch-osm   # only the OSM parts
 
-# 2. Host any new Geograph photos (Geograph asks reusers not to hotlink)
+# 2. Host any new Geograph photos (Geograph asks reusers not to hotlink), and look up when new photos
+#    were taken (for each place's "last seen" date)
 node scripts/photos/geograph.mjs
+node scripts/photos/dates.mjs
 
 # 3. Build the app's data files and the sources register
 node scripts/build-layers.mjs

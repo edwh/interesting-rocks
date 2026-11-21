@@ -171,10 +171,17 @@
   "icon": "leaf",
   "family": "old",
   "description": "Churches with Green Man carvings, found from geotagged photos on Wikimedia Commons. Positions are where the photo was taken.",
-  "source": "Wikimedia Commons",
-  "licence": "Per-photo Commons licences",
-  "attribution": "Photos and positions from Wikimedia Commons, credited individually.",
-  "fetch": "python3 scripts/layers/interests/run.py scripts/work/layers --refetch greenman",
+  "source": "Wikimedia Commons; Geograph",
+  "licence": "Per-photo licences: Commons (CC BY, CC BY-SA, CC0, public domain) and Geograph (CC BY-SA 2.0)",
+  "attribution": "Photos and positions from Wikimedia Commons and Geograph, credited individually.",
+  "fetch": [
+   "python3 scripts/layers/interests/run.py scripts/work/layers --refetch greenman",
+   "node scripts/layers/greenman/geograph.mjs",
+   "node scripts/photos/geograph.mjs"
+  ],
+  "dedupe": "near",
+  "dedupeRadius": 150,
+  "dedupeAnyName": true,
   "defaultOn": true,
   "color": "#6250d6",
   "ink": "#ffffff",
@@ -182,11 +189,11 @@
    {
     "tier": 1,
     "file": "data/layers/greenman-1.json",
-    "count": 109
+    "count": 204
    }
   ],
-  "count": 109,
-  "photos": 109,
+  "count": 204,
+  "photos": 204,
   "fetched": "2026-11-21"
  },
  {

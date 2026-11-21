@@ -10,6 +10,41 @@ let ctx = null;
 // Whether the public can visit, not opening hours (which would go out of date). Private places are not shown.
 export const ACCESS = { open: 'Free public access', limited: 'Paid entry or booking', gone: 'Lost or unconfirmed' };
 
+// "Last seen": the latest evidence the place still exists, newest first: your own visit, a dated photo,
+// or an OpenStreetMap survey date. Old evidence is flagged, and no evidence is said plainly.
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+function fmtPartial(d) {
+  const [y, m, day] = d.split('-');
+  return [day ? +day : '', m ? MONTHS[+m - 1] : '', y].filter(Boolean).join(' ');
+}
+function lastSeen(s, meta) {
+  const dt = document.createElement('dt'); dt.textContent = 'Last seen';
+  const dd = document.createElement('dd');
+  const mine = visited.date(s.id);
+  const link = (text, href) => { const a = document.createElement('a'); a.href = href; a.target = '_blank'; a.rel = 'noopener'; a.textContent = text; return a; };
+  let when = s.seen;
+  if (mine && (!when || mine.slice(0, 10) >= when)) {
+    when = mine.slice(0, 10);
+    dd.append(`${fmtPartial(when)}, by you`);
+  } else if (when && s.seenBy === 'photo') {
+    const p = (s.photos || []).find(x => x.date === when);
+    const who = (p?.artist || 'unknown').replace(/^(photo(graph)?\s+by|photo:)\s*/i, '');
+    dd.append(`${fmtPartial(when)}, in a photo by ${who} `);
+    if (p) dd.append('(', link('see photo', p.page), ')');
+  } else if (when && /^osm /.test(s.seenBy || '')) {
+    const [, type, id] = s.seenBy.split(' ');
+    dd.append(`${fmtPartial(when)}, `, link('checked on the ground by an OpenStreetMap mapper', `https://www.openstreetmap.org/${type}/${id}`));
+  } else {
+    dd.className = 'muted';
+    dd.textContent = 'No dated evidence yet';
+  }
+  if (when && +when.slice(0, 4) < new Date().getFullYear() - 10) {
+    const w = document.createElement('span'); w.className = 'stale'; w.textContent = ' · may have changed since';
+    dd.append(w);
+  }
+  meta.append(dt, dd);
+}
+
 export function fmtDate(iso) {
   const d = new Date(iso + 'T12:00:00');
   return isNaN(d) ? iso : d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
@@ -131,6 +166,7 @@ export function openPlace(s) {
   row('Type', (s.kind || layer.kinds?.[s.grade] || '') + (s.count > 1 ? ` (${s.count})` : ''));
   row('Date', s.year);
   row('Access', ACCESS[s.access]);
+  lastSeen(s, meta);
   row('Grid ref', s.grid, true);
   row('Lat, long', s.ll.join(', ') + (s.approx ? ' (approx.)' : ''), true);
   const refs = sourceRefs(s);

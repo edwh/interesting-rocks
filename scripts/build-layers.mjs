@@ -26,16 +26,32 @@ function hostPhoto(p) {
   try { host = new URL(p.src).hostname; } catch { return p; }
   if (!host.endsWith('geograph.org.uk')) return p;
   const id = /geograph\.org\.uk\/photo\/(\d+)/.exec(p.page || '')?.[1];
-  if (id && geoMirrors[id]) return { ...geoMirrors[id], artist: geoMirrors[id].artist || p.artist };
+  if (id && geoMirrors[id]) return { ...geoMirrors[id], artist: geoMirrors[id].artist || p.artist, date: p.date };
   if (id && fs.existsSync(`data/photos/geograph/${id}.jpg`)) return { ...p, src: `data/photos/geograph/${id}.jpg` };
   geoUnhosted.add(id || p.page);
   return null;
 }
+// Proof of life: the latest date we have evidence a place still exists. Evidence is the date a photo was
+// taken (scripts/photos/dates.mjs looks these up on Commons) or an OpenStreetMap survey date
+// (check_date, check_date:*, survey:date), read from the extract index. Upload and edit dates don't count.
+const photoDates = fs.existsSync('scripts/work/raw/photo-dates.json') ? JSON.parse(fs.readFileSync('scripts/work/raw/photo-dates.json', 'utf8')) : {};
+const commonsTitle = page => { const m = /commons\.wikimedia\.org\/wiki\/(File:[^?#]+)/.exec(page || ''); return m ? decodeURIComponent(m[1]).replace(/_/g, ' ') : null; };
+const osmSurveyed = new Map();
+if (fs.existsSync('scripts/work/raw/osm/poi.jsonl')) {
+  for (const line of fs.readFileSync('scripts/work/raw/osm/poi.jsonl', 'utf8').split('\n')) {
+    if (!line.includes('check_date') && !line.includes('survey:date')) continue;
+    const e = JSON.parse(line);
+    const d = Object.entries(e.tags).filter(([k]) => k === 'survey:date' || k === 'check_date' || k.startsWith('check_date:'))
+      .map(([, v]) => (/^(\d{4})(-\d{2})?(-\d{2})?/.exec(v) || [])[0]).filter(Boolean).sort().pop();
+    if (d) osmSurveyed.set(`osm ${e.type} ${e.id}`, d);
+  }
+}
+const seenStats = {};
 const ACCESS = new Set(['open', 'limited', 'gone', 'unknown']);
 // Places a source marks as not open to the public (OSM access=private or no) are left off the map.
 const privateDropped = {};
 const KEEP = ['id', 'cat', 'name', 'artist', 'author', 'group', 'year', 'll', 'approx', 'place', 'region', 'access',
-  'kind', 'count', 'about', 'note', 'url', 'grid', 'grade', 'tier', 'wikidata', 'src', 'fetched', 'photos'];
+  'kind', 'count', 'about', 'note', 'url', 'grid', 'grade', 'tier', 'wikidata', 'src', 'fetched', 'photos', 'seen', 'seenBy'];
 // Big layers ship compact records: the source id is the record id, the date is in the manifest,
 // and the link and type are rebuilt in the app from the layer's "urls" and "kinds".
 const COMPACT_DROP = ['cat', 'src', 'fetched', 'region', 'tier'];
@@ -83,9 +99,11 @@ function withinLayerDedupe(layer) {
     const refs = refsOf(r);
     let dup = refs.some(x => refFrom.has(x) && refFrom.get(x) !== r._from);
     if (!dup && layer.dedupe === 'near') {
+      // "dedupeRadius" widens the test, and "dedupeAnyName" drops the name test (one Green Man per church).
+      const radius = layer.dedupeRadius || 100, named = layer.dedupeAnyName ? () => true : sameName;
       const [la, lo] = [Math.round(r.ll[0] * 200), Math.round(r.ll[1] * 100)];
       for (let a = -1; a <= 1 && !dup; a++) for (let b = -1; b <= 1 && !dup; b++) {
-        dup = (grid.get(`${la + a},${lo + b}`) || []).some(c => c._from !== r._from && metres(c.ll, r.ll) < 100 && sameName(c.name, r.name));
+        dup = (grid.get(`${la + a},${lo + b}`) || []).some(c => c._from !== r._from && metres(c.ll, r.ll) < radius && named(c.name, r.name));
       }
     }
     if (dup) return true;
@@ -194,10 +212,21 @@ for (const layer of config) {
     r.region = regionFor(r);
     if (layer.accessMap?.[r.access]) r.access = layer.accessMap[r.access];
     if (!ACCESS.has(r.access)) r.access = layer.defaultAccess || 'open';
-    r.photos = (r.photos || []).map(p => p && p.src && p.page ? hostPhoto(p) : null)
+    let photos = (r.photos || []).map(p => p && p.src && p.page ? hostPhoto(p) : null)
       .filter(p => p && FREE.test((p.license || '').trim()) && !(NEEDS_AUTHOR.test(p.license) && !(p.artist || '').trim() || /^unknown$/i.test((p.artist || '').trim()) && NEEDS_AUTHOR.test(p.license)))
-      .slice(0, 4)
-      .map(p => ({ src: p.src, page: p.page, license: p.license.trim(), artist: (p.artist || 'Unknown').slice(0, 80), title: p.title || '' }));
+      .map(p => ({ src: p.src, page: p.page, license: p.license.trim(), artist: (p.artist || 'Unknown').slice(0, 80), title: p.title || '', date: p.date || photoDates[commonsTitle(p.page)] || undefined }));
+    // The newest dated photo is the proof of life, so make sure it is among the four shown.
+    const newest = photos.reduce((b, p, i) => (p.date && (b < 0 || p.date > photos[b].date) ? i : b), -1);
+    if (newest >= 4) photos = [...photos.slice(0, 3), photos[newest]];
+    r.photos = photos.slice(0, 4);
+    const evidence = [
+      ...r.photos.filter(p => p.date).map(p => [p.date, 'photo']),
+      ...refsOf(r).filter(x => osmSurveyed.has(x)).map(x => [osmSurveyed.get(x), x]),
+    ].sort((a, b) => (a[0] < b[0] ? 1 : -1));
+    if (evidence.length) { r.seen = evidence[0][0]; r.seenBy = evidence[0][1]; }
+    const st = (seenStats[layer.key] ||= { n: 0, seen: 0, recent: 0 });
+    st.n++;
+    if (r.seen) { st.seen++; if (+r.seen.slice(0, 4) >= new Date().getFullYear() - 10) st.recent++; }
     let id = (!layer.curated && stableId(r)) || String(r.id || r.name).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
     if (used.has(id)) id = `${layer.key}-${id}`;
     for (let n = 2; used.has(id); n++) id = id.replace(/-\d+$/, '') + '-' + n;
@@ -253,12 +282,14 @@ for (const m of config) {
     `- Source: ${m.source}`, `- Licence: ${m.licence}`, ...(m.attribution ? [`- Attribution: ${m.attribution}`] : []),
     `- Fetch: ${[].concat(m.fetch || (m.key === 'goldsworthy' ? 'see README (scripts/sites.mjs ... scripts/curate.mjs)' : 'none')).map(c => '`' + c + '`').join(', then ')}`,
     `- Work files: ${(m.sources || [m.key]).map(k => '`scripts/work/layers/' + k + '.json`').join(', ')}`,
-    `- Built: ${built.count} places (${built.files.map(f => `tier ${f.tier}: ${f.count}`).join(', ') || 'no data yet'}), ${built.photos} with photos${built.fetched ? ', fetched ' + built.fetched : ''}`, '');
+    `- Built: ${built.count} places (${built.files.map(f => `tier ${f.tier}: ${f.count}`).join(', ') || 'no data yet'}), ${built.photos} with photos${built.fetched ? ', fetched ' + built.fetched : ''}`,
+    `- Proof of life: ${seenStats[m.key]?.seen || 0} places have a last-seen date (dated photo or OSM survey), ${seenStats[m.key]?.recent || 0} within the last 10 years`, '');
 }
 fs.writeFileSync('scripts/layers/SOURCES.md', md.join('\n'));
 
 if (geoUnhosted.size) console.log(`${geoUnhosted.size} Geograph photos dropped because they are not hosted yet (run node scripts/photos/geograph.mjs)`);
 for (const [k, n] of Object.entries(claimCount)) console.log(`${k}: moved ${n}`);
 for (const [k, n] of Object.entries(privateDropped)) console.log(`${k}: left out ${n} not open to the public`);
+for (const [k, s] of Object.entries(seenStats)) console.log(`${k}: last seen date for ${s.seen} of ${s.n} (${s.recent} within 10 years)`);
 for (const [k, n] of Object.entries(dropped)) console.log(`${k}: dropped ${n.length} duplicates (of a curated place or an earlier source): ${n.slice(0, 8).join("; ")}`);
 if (problems.length) console.log('\n' + problems.join('\n'));
